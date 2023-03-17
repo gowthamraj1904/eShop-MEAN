@@ -42,7 +42,7 @@ mongoose
         console.log('database connection is ready');
     })
     .catch((err) => {
-        console.log(err);
+        console.log('Database connection failed', err);
     });
 
 // Run the server with port
