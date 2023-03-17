@@ -13,13 +13,14 @@ require('dotenv/config');
 const port = process.env.PORT;
 const api = process.env.API_URL;
 const connectionString = process.env.CONNECTION_STRING;
-const { options } = require('nodemon/lib/config');
+// const { options } = require('nodemon/lib/config');
 // Routers
 const categoriesRouter = require('./routers/categories');
 const productsRouter = require('./routers/products');
 const ordersRouter = require('./routers/orders');
 const usersRouter = require('./routers/users');
 
+// CORS
 app.use(cors());
 app.options('*', cors());
 // Middleware
