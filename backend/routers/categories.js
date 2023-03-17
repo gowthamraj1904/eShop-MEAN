@@ -2,15 +2,18 @@ const express = require('express');
 const router = express.Router();
 const { Category } = require('../models/category');
 
+// Get all categories
 router.get(`/`, async (req, res) => {
     const categories = await Category.find();
 
     if (!categories) {
         res.status(500).json({ success: false });
     }
+
     res.status(200).send(categories);
 });
 
+// Get one category by Id
 router.get('/:id', async (req, res) => {
     const category = await Category.findById(req.params.id);
 
@@ -20,9 +23,11 @@ router.get('/:id', async (req, res) => {
             message: 'Category is not available'
         });
     }
+
     res.status(200).send(category);
 });
 
+// Add new Category
 router.post(`/`, async (req, res) => {
     const category = {
         name: req.body.name,
@@ -40,24 +45,28 @@ router.post(`/`, async (req, res) => {
     res.status(200).send(newCategory);
 });
 
+// Update a category
 router.put('/:id', async (req, res) => {
-    const category = await Category.findByIdAndUpdate(
+    const category = {
+        name: req.body.name,
+        icon: req.body.icon,
+        color: req.body.color
+    };
+
+    const updateCategory = await Category.findByIdAndUpdate(
         req.params.id,
-        {
-            name: req.body.name,
-            icon: req.body.icon,
-            color: req.body.color
-        },
+        category,
         { new: true }
     );
 
-    if (!category) {
+    if (!updateCategory) {
         res.status(404).send('The Category cannot be created');
     }
 
-    res.status(200).send(category);
+    res.status(200).send(updateCategory);
 });
 
+// Delete a category by Id
 router.delete('/:id', (req, res) => {
     Category.findByIdAndRemove(req.params.id)
         .then((category) => {
