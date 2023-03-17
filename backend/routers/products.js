@@ -7,14 +7,18 @@ const mongoose = require('mongoose');
 // Get all products
 router.get(`/`, async (req, res) => {
     // localhost:3000/api/v1/products?categories=1235,98765
-    let filter = [];
+    let filter = {
+        category: []
+    };
 
     // Filter based on the query params
-    if (req.query.categories) {
-        filter = { category: req.query.categories.split(',') };
+    if (req.query?.categories) {
+        filter.category = req.query?.categories.split(',');
     }
 
-    const products = await Product.find(filter);
+    const products = await Product.find(
+        filter.category.length > 0 ? filter : null
+    );
 
     if (!products) {
         res.status(500).json({ status: false });
@@ -151,7 +155,13 @@ router.delete('/:id', (req, res) => {
 
 // Get product count
 router.get(`/get/count`, async (req, res) => {
-    const productsCount = await Product.countDocuments((count) => count);
+    // Get all the count
+    // const productsCount = await Product.countDocuments();
+    // Get product count with rating is greater then 2
+    const productsCount = await Product.countDocuments(
+        { rating: { $gt: 2 } },
+        { limit: 100 }
+    );
 
     if (!productsCount) {
         res.status(500).json({

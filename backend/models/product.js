@@ -22,7 +22,7 @@ const productSchema = mongoose.Schema({
 
 // Default key for the id is "_id" so, we can create a virtual key "id"
 productSchema.virtual('id').get(function () {
-    return this._id.toHexString();
+    return this._id;
 });
 
 productSchema.set('toJSON', {
