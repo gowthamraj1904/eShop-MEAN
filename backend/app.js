@@ -13,7 +13,6 @@ require('dotenv/config');
 const port = process.env.PORT;
 const api = process.env.API_URL;
 const connectionString = process.env.CONNECTION_STRING;
-// const { options } = require('nodemon/lib/config');
 // Routers
 const categoriesRouter = require('./routers/categories');
 const productsRouter = require('./routers/products');
@@ -51,7 +50,7 @@ mongoose
         console.log('database connection is ready');
     })
     .catch((err) => {
-        console.log('Database connection failed', err);
+        console.log('Database connection failed');
     });
 
 // Run the server with port
