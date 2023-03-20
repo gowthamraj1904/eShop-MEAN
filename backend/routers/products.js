@@ -30,7 +30,7 @@ router.get(`/`, async (req, res) => {
 // Get only required fields
 router.get(`/get/custom-fields`, async (req, res) => {
     // Get few fields only from the table
-    // -_is is exclude the id from the response
+    // -_id is exclude the id from the response
     const products = await Product.find().select('name image -_id');
 
     if (!products) {
@@ -46,10 +46,11 @@ router.get(`/:id`, async (req, res) => {
     const products = await Product.findById(req.params.id).populate('category');
 
     if (!products) {
-        res.status(500).json({
+        const response = {
             status: false,
             message: 'Product is not available'
-        });
+        };
+        res.status(500).json(response);
     }
 
     res.status(200).send(products);
@@ -134,29 +135,31 @@ router.delete('/:id', (req, res) => {
     Product.findByIdAndRemove(req.params.id)
         .then((product) => {
             if (product) {
-                return res.status(200).json({
+                const response = {
                     success: true,
                     message: 'The product is deleted'
-                });
+                };
+                return res.status(200).json(response);
             } else {
-                return res.status(404).json({
+                const response = {
                     success: false,
                     message: 'Product not found'
-                });
+                };
+                return res.status(404).json(response);
             }
         })
         .catch((err) => {
-            return res.status(400).json({
+            const response = {
                 success: false,
                 error: err
-            });
+            };
+            return res.status(400).json(response);
         });
 });
 
 // Get product count
 router.get(`/get/count`, async (req, res) => {
-    // Get all the count
-    // const productsCount = await Product.countDocuments();
+    // Get all the count - Product.countDocuments();
     // Get product count with rating is greater then 2
     const productsCount = await Product.countDocuments(
         { rating: { $gt: 2 } },
@@ -164,10 +167,11 @@ router.get(`/get/count`, async (req, res) => {
     );
 
     if (!productsCount) {
-        res.status(500).json({
+        const response = {
             status: false,
             message: 'Product is empty'
-        });
+        };
+        res.status(500).json(response);
     }
 
     res.status(200).send({ productsCount: productsCount });
@@ -176,15 +180,17 @@ router.get(`/get/count`, async (req, res) => {
 // Get only featured products with custom limit
 router.get(`/get/featured/:count`, async (req, res) => {
     const count = req.params.count ? req.params.count : 0;
-    const products = await Product.find({ isFeatured: true }).limit(
-        Number(count)
-    );
+    const filter = {
+        isFeatured: true
+    };
+    const products = await Product.find(filter).limit(Number(count));
 
     if (!products) {
-        res.status(500).json({
+        const response = {
             status: false,
             message: 'Product is empty'
-        });
+        };
+        res.status(500).json(response);
     }
 
     res.status(200).send(products);

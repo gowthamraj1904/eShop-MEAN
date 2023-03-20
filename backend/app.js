@@ -19,13 +19,21 @@ const categoriesRouter = require('./routers/categories');
 const productsRouter = require('./routers/products');
 const ordersRouter = require('./routers/orders');
 const usersRouter = require('./routers/users');
+const authJwt = require('./helpers/jwt');
+const handlerErr = require('./helpers/error-handler');
 
+// Middleware
 // CORS
 app.use(cors());
 app.options('*', cors());
-// Middleware
+// To JSON
 app.use(express.json());
+// To log HTTP requests
 app.use(morgan('tiny'));
+// JWT Token Authentication
+app.use(authJwt());
+// Error Handler
+app.use(handlerErr);
 // Routers
 app.use(`${api}/categories`, categoriesRouter);
 app.use(`${api}/products`, productsRouter);
