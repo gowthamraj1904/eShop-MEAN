@@ -8,7 +8,7 @@ router.get(`/`, async (req, res) => {
     if (!orders) {
         res.status(500).json({ success: false });
     }
-    res.send(orders);
+    res.status(200).send(orders);
 });
 
 module.exports = router;

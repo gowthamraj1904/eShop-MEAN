@@ -103,3 +103,17 @@ Network Access - Add current IP address
 MongoDB Schema to create a collection/table
 
 ---
+
+### BCryptJS
+To password hash
+_npm install mongoose_
+
+---
+
+### JSON Web Token
+_npm install jsonwebtoken_
+
+---
+
+### Express JWT
+_npm install express-jwt_
