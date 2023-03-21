@@ -7,9 +7,14 @@ const isRevoked = async (req, token) => {
 function authJwt() {
     const secret = process.env.SECRET;
     const api = process.env.API_URL;
+    const productsImageUrlRegExp = /\/public\/uploads(.*)/;
     const productsUrlRegExp = /\/api\/v1\/products(.*)/;
     const categoriesUrlRegExp = /\/api\/v1\/categories(.*)/;
     const excludeApis = [
+        {
+            url: productsImageUrlRegExp,
+            methods: ['GET', 'OPTIONS']
+        },
         {
             url: categoriesUrlRegExp,
             methods: ['GET', 'OPTIONS']

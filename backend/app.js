@@ -33,6 +33,8 @@ app.use(morgan('tiny'));
 app.use(authJwt());
 // Error Handler
 app.use(handlerErr);
+// Access the upload image folder without authentication
+app.use('/public/uploads', express.static(__dirname + '/public/uploads'));
 // Routers
 app.use(`${api}/categories`, categoriesRouter);
 app.use(`${api}/products`, productsRouter);
