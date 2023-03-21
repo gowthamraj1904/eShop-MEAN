@@ -1,6 +1,6 @@
-# eShop
+# eShop - Backend
 
-MEAN Stack E-Shop App using Angular 15, NodeJS, MongoDB
+MEAN Stack E-Shop App using MongoDB, ExpressJS, Angular and NodeJS
 
 **Developed by** **_GOWTHAMRAJ S_**
 
@@ -105,21 +105,55 @@ MongoDB Schema to create a collection/table
 ---
 
 ### BCryptJS
+
 To password hash
 _npm install mongoose_
 
 ---
 
 ### JSON Web Token
+
 _npm install jsonwebtoken_
 
 ---
 
 ### Express JWT
+
 _npm install express-jwt_
 
 ---
 
 ### Multer
+
 To upload files to the server
 _npm install multer_
+
+---
+
+# eShop - Frontend
+
+Frontend development using Angular, Nx monorepo
+
+---
+
+### Nx monorepo
+
+For micro frentend
+_npm install -g nx_
+
+---
+
+Created workspace using _npm create-nx-workspace frontend --preset=angula_
+
+The application name is _e-shop_
+
+Generated another app Admin using ___nx generate @nrwl/angular:app admin___
+
+---
+
+### To run the app
+
+_nx serve e-shop_
+_nx serve admin_
+
+---
