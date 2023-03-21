@@ -117,3 +117,9 @@ _npm install jsonwebtoken_
 
 ### Express JWT
 _npm install express-jwt_
+
+---
+
+### Multer
+To upload files to the server
+_npm install multer_
