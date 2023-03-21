@@ -7,11 +7,11 @@ const categorySchema = mongoose.Schema({
     image: { type: String }
 });
 
-userSchema.virtual('id').get(function () {
+categorySchema.virtual('id').get(function () {
     return this._id;
 });
 
-userSchema.set('toJSON', {
+categorySchema.set('toJSON', {
     virtuals: true
 });
 
