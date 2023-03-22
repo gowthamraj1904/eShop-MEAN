@@ -9,7 +9,7 @@
                     "error",
                     {
                         "type": "attribute",
-                        "prefix": "frontend",
+                        "prefix": "eShop",
                         "style": "camelCase"
                     }
                 ],
@@ -17,7 +17,7 @@
                     "error",
                     {
                         "type": "element",
-                        "prefix": "frontend",
+                        "prefix": "e-shop",
                         "style": "kebab-case"
                     }
                 ]
