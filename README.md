@@ -1,6 +1,6 @@
 # eShop - Backend
 
-MEAN Stack E-Shop App using MongoDB, ExpressJS, Angular and NodeJS
+MEAN Stack E-Shop App using _MongoDB, ExpressJS, Angular and NodeJS_
 
 **Developed by** **_GOWTHAMRAJ S_**
 
@@ -19,13 +19,13 @@ MEAN Stack E-Shop App using MongoDB, ExpressJS, Angular and NodeJS
 
 ### Initialize npm
 
-_npm init_
+**_npm init_**
 
 ---
 
 ### Install Prettier
 
-_npm install prettier_
+**_npm install prettier_**
 
 **Config**
 
@@ -40,41 +40,41 @@ _npm install prettier_
 
 ### Install Node Monitor
 
-_npm install nodemon_
+**_npm install nodemon_**
 
 ---
 
-Update npm start script in package.json file
+Update npm start script in _package.json_ file
 
 ---
 
 ### Install ExpressJS
 
-_npm install express_
+**_npm install express_**
 
 ---
 
-Create app.js and use express js
+Create _app.js_ and use _express js_
 
 ---
 
 ### Install dotEnv
 
-_npm install dotenv_
+**_npm install dotenv_**
 
 ---
 
-Create Environment variable -> .env file
+Create Environment variable -> _.env_ file
 
 ---
 
-Previously in node application we were using a library called body-parser to parse json data which comes from the frontend to the backend, But now this library got deprecated and express has ability to parse the data to json without using external library as you saw in the previous video. so from now on, if you see in next lectures we are using body-parser, just replace _app.use(bodyParser.json()) with app.use(express.json())_
+Previously in node application we were using a library called body-parser to parse json data which comes from the frontend to the backend, But now this library got deprecated and express has ability to parse the data to json without using external library as you saw in the previous video. so from now on, if you see in next lectures we are using body-parser, just replace **_app.use(bodyParser.json()) with app.use(express.json())_**
 
 ---
 
 ### Install Morgan
 
-_npm install morgan_
+**_npm install morgan_**
 
 To Log HTTP request
 
@@ -82,13 +82,13 @@ To Log HTTP request
 
 ### Install CORS
 
-_npm install cors_
+**_npm install cors_**
 
 ---
 
 ### Install Mangoose
 
-_npm install mongoose_
+**_npm install mongoose_**
 
 ---
 
@@ -100,39 +100,39 @@ Network Access - Add current IP address
 
 ---
 
-MongoDB Schema to create a collection/table
+_MongoDB Schema_ to create a collection/table
 
 ---
 
 ### BCryptJS
 
 To password hash
-_npm install mongoose_
+**_npm install mongoose_**
 
 ---
 
 ### JSON Web Token
 
-_npm install jsonwebtoken_
+**_npm install jsonwebtoken_**
 
 ---
 
 ### Express JWT
 
-_npm install express-jwt_
+**_npm install express-jwt_**
 
 ---
 
 ### Multer
 
 To upload files to the server
-_npm install multer_
+**_npm install multer_**
 
 ---
 
 # eShop - Frontend
 
-Frontend development using _Angular, Nx monorepo_
+Frontend development using **_Angular, Nx monorepo_**
 
 ---
 
@@ -169,9 +169,14 @@ Create components in the libs
 
 ### primeNg
 
-**_ng install primeng --save_**
-**_ng install primeicons --save_**
+**_npm install primeng --save_**
+
+**_npm install primeicons --save_**
 
 **_npm install primeflex --save_**
 
 ---
+
+### Normalize.css
+
+**_npm install normalize.css_**
