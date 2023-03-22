@@ -159,3 +159,8 @@ ___nx serve admin___
 ---
 
 Generated library using ___npx nx generate @nrwl/angular:lib ui___
+
+---
+
+Create components in the libs
+___npx nx generate @nrwl/angular:component slider --project=ui --export --selector=ui-slider --no-interactive___
