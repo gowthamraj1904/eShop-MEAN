@@ -132,28 +132,30 @@ _npm install multer_
 
 # eShop - Frontend
 
-Frontend development using Angular, Nx monorepo
+Frontend development using _Angular, Nx monorepo_
 
 ---
 
 ### Nx monorepo
 
 For micro frentend
-_npm install -g nx_
+___npm install -g nx___
 
 ---
 
-Created workspace using _npm create-nx-workspace frontend --preset=angula_
+Created workspace using ___npx create-nx-workspace frontend --preset=angula___
 
-The application name is _e-shop_
+The application name is ___e-shop___
 
-Generated another app Admin using ___nx generate @nrwl/angular:app admin___
+Generated another app Admin using ___npx nx generate @nrwl/angular:app admin___
 
 ---
 
 ### To run the app
 
-_nx serve e-shop_
-_nx serve admin_
+___nx serve e-shop___
+___nx serve admin___
 
 ---
+
+Generated library using ___npx nx generate @nrwl/angular:lib ui___
