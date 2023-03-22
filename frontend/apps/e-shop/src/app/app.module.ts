@@ -20,11 +20,11 @@ import { UiModule } from '@lib/ui';
     ],
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         RouterModule.forRoot(appRoutes, {
             initialNavigation: 'enabledBlocking'
         }),
-        UiModule,
-        BrowserAnimationsModule
+        UiModule
     ],
     providers: [],
     bootstrap: [AppComponent]
