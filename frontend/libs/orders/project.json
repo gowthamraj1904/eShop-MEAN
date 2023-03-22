@@ -3,7 +3,7 @@
     "$schema": "../../node_modules/nx/schemas/project-schema.json",
     "projectType": "library",
     "sourceRoot": "libs/orders/src",
-    "prefix": "users",
+    "prefix": "orders",
     "targets": {
         "build": {
             "executor": "@nrwl/angular:ng-packagr-lite",
