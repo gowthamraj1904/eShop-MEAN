@@ -139,28 +139,39 @@ Frontend development using _Angular, Nx monorepo_
 ### Nx monorepo
 
 For micro frentend
-___npm install -g nx___
+**_npm install -g nx_**
 
 ---
 
-Created workspace using ___npx create-nx-workspace frontend --preset=angula___
+Created workspace using **_npx create-nx-workspace frontend --preset=angula_**
 
-The application name is ___e-shop___
+The application name is **_e-shop_**
 
-Generated another app Admin using ___npx nx generate @nrwl/angular:app admin___
+Generated another app Admin using **_npx nx generate @nrwl/angular:app admin_**
 
 ---
 
 ### To run the app
 
-___nx serve e-shop___
-___nx serve admin___
+**_nx serve e-shop_**
+**_nx serve admin_**
 
 ---
 
-Generated library using ___npx nx generate @nrwl/angular:lib ui___
+Generated library using **_npx nx generate @nrwl/angular:lib ui_**
 
 ---
 
 Create components in the libs
-___npx nx generate @nrwl/angular:component slider --project=ui --export --selector=ui-slider --no-interactive___
+**_npx nx generate @nrwl/angular:component slider --project=ui --export --selector=ui-slider --no-interactive_**
+
+---
+
+### primeNg
+
+**_ng install primeng --save_**
+**_ng install primeicons --save_**
+
+**_npm install primeflex --save_**
+
+---
