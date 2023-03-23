@@ -15,12 +15,19 @@
                 "polyfills": ["zone.js"],
                 "tsConfig": "apps/admin/tsconfig.app.json",
                 "inlineStyleLanguage": "scss",
+                "allowedCommonJsDependencies": ["quill"],
                 "assets": [
                     "apps/admin/src/favicon.ico",
                     "apps/admin/src/assets"
                 ],
-                "styles": ["apps/admin/src/styles.scss"],
-                "scripts": []
+                "styles": [
+                    "D:\\Projects/Practice/eShop/frontend/node_modules/quill/dist/quill.core.css",
+                    "D:\\Projects/Practice/eShop/frontend/node_modules/quill/dist/quill.snow.css",
+                    "apps/admin/src/styles.scss"
+                ],
+                "scripts": [
+                    "D:\\Projects/Practice/eShop/frontend/node_modules/quill/dist/quill.js"
+                ]
             },
             "configurations": {
                 "production": {

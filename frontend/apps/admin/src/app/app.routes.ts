@@ -1,8 +1,12 @@
 import { Route } from '@angular/router';
-import { CategoriesFormComponent } from './pages/categories/categories-form/categories-form.component';
-import { CategoriesListComponent } from './pages/categories/categories-list/categories-list.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ShellComponent } from './shared/shell/shell.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+
+import { CategoriesListComponent } from './pages/categories/categories-list/categories-list.component';
+import { CategoriesFormComponent } from './pages/categories/categories-form/categories-form.component';
+
+import { ProductsFormComponent } from './pages/products/products-form/products-form.component';
+import { ProductsListComponent } from './pages/products/products-list/products-list.component';
 
 export const appRoutes: Route[] = [
     {
@@ -24,6 +28,18 @@ export const appRoutes: Route[] = [
             {
                 path: 'categories/form/:categoryId',
                 component: CategoriesFormComponent
+            },
+            {
+                path: 'products',
+                component: ProductsListComponent
+            },
+            {
+                path: 'products/form',
+                component: ProductsFormComponent
+            },
+            {
+                path: 'products/form/:productId',
+                component: ProductsFormComponent
             }
         ]
     },

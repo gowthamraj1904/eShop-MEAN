@@ -1,0 +1,226 @@
+<p-toast></p-toast>
+<div class="admin-page">
+    <p-card
+        [header]="isEditMode ? 'Edit Product' : 'Add Product'"
+        subheader="You can add or edit product"
+    >
+        <div class="grid mb-4">
+            <div class="col-12">
+                <p-toolbar>
+                    <div class="p-toolbar-group-left"></div>
+                    <div class="p-toolbar-group-right">
+                        <p-button
+                            [label]="isEditMode ? 'Update' : 'Create'"
+                            icon="pi pi-plus"
+                            styleClass="p-button-primary mr-2"
+                            (click)="onSubmit()"
+                        ></p-button>
+                        <p-button
+                            label="Cancel"
+                            icon="pi pi-arrow-left"
+                            styleClass="p-button-secondary"
+                            (click)="onCancel()"
+                        ></p-button>
+                    </div>
+                </p-toolbar>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col-12">
+                <form [formGroup]="form">
+                    <div class="formgrid grid">
+                        <div class="field col-4">
+                            <label for="name">Name</label>
+                            <input
+                                pInputText
+                                id="name"
+                                type="text"
+                                class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+                                formControlName="name"
+                                aria-describedby="name-help"
+                            />
+                            <small
+                                id="name-help"
+                                class="p-error"
+                                *ngIf="
+                                    form.controls['name'].invalid && isSubmitted
+                                "
+                                >Name is required</small
+                            >
+                        </div>
+                        <div class="field col-4">
+                            <label for="brand">Brand</label>
+                            <input
+                                pInputText
+                                id="brand"
+                                type="text"
+                                class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+                                formControlName="brand"
+                                aria-describedby="brand-help"
+                            />
+                            <small
+                                id="brand-help"
+                                class="p-error"
+                                *ngIf="
+                                    form.controls['brand'].invalid &&
+                                    isSubmitted
+                                "
+                                >Brand is required</small
+                            >
+                        </div>
+                        <div class="field col-4">
+                            <label for="category">Category</label>
+                            <p-dropdown
+                                [filter]="true"
+                                filterBy="name"
+                                [showClear]="true"
+                                placeholder="Select a Country"
+                                formControlName="category"
+                                [options]="categories"
+                                optionLabel="name"
+                                optionValue="id"
+                                styleClass="w-full"
+                                aria-describedby="category-help"
+                            ></p-dropdown>
+                            <small
+                                id="category-help"
+                                class="p-error"
+                                *ngIf="
+                                    form.controls['category'].invalid &&
+                                    isSubmitted
+                                "
+                                >Category is required</small
+                            >
+                        </div>
+                        <div class="field col-4">
+                            <label for="price">Price</label>
+                            <p-inputNumber
+                                id="price"
+                                mode="decimal"
+                                inputId="locale-user"
+                                styleClass="w-full"
+                                class="text-base text-color surface-overlay appearance-none outline-none focus:border-primary w-full"
+                                formControlName="price"
+                                aria-describedby="price-help"
+                            ></p-inputNumber>
+                            <small
+                                id="price-help"
+                                class="p-error"
+                                *ngIf="
+                                    form.controls['price'].invalid &&
+                                    isSubmitted
+                                "
+                                >Price is required</small
+                            >
+                        </div>
+                        <div class="field col-4">
+                            <label for="stock-count">Stock Count</label>
+                            <p-inputNumber
+                                type="text"
+                                id="stock-count"
+                                mode="decimal"
+                                inputId="locale-user"
+                                styleClass="w-full"
+                                class="text-base text-color surface-overlay appearance-none outline-none focus:border-primary w-full"
+                                formControlName="countInStock"
+                                aria-describedby="stock-count-help"
+                            ></p-inputNumber>
+                            <small
+                                id="stock-count-help"
+                                class="p-error"
+                                *ngIf="
+                                    form.controls['countInStock'].invalid &&
+                                    isSubmitted
+                                "
+                                >Brand is required</small
+                            >
+                        </div>
+                        <div class="field col-4">
+                            <label for="is-featured">Is Featured</label>
+                            <br />
+                            <p-inputSwitch
+                                id="is-featured"
+                                formControlName="isFeatured"
+                            ></p-inputSwitch>
+                        </div>
+                        <div class="field col-12">
+                            <label for="description">Description</label>
+                            <textarea
+                                pInputTextarea
+                                id="description"
+                                type="text"
+                                rows="4"
+                                class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+                                formControlName="description"
+                                aria-describedby="description-help"
+                            ></textarea>
+                            <small
+                                id="description-help"
+                                class="p-error"
+                                *ngIf="
+                                    form.controls['description'].invalid &&
+                                    isSubmitted
+                                "
+                                >Description is required</small
+                            >
+                        </div>
+                        <div class="field col-12">
+                            <label for="rich-description"
+                                >Rich Description</label
+                            >
+                            <p-editor
+                                id="rich-description"
+                                formControlName="richDescription"
+                                [style]="{ height: '320px' }"
+                            ></p-editor>
+                        </div>
+                        <div class="field col-12">
+                            <label for="image">Image</label>
+                            <input
+                                type="file"
+                                id="image"
+                                accept="images/*"
+                                class="p-inputtext w-full"
+                                (change)="onImageUpload($event)"
+                            />
+                            <small
+                                id="category-help"
+                                class="p-error"
+                                *ngIf="
+                                    form.controls['category'].invalid &&
+                                    isSubmitted
+                                "
+                            >
+                                Image is required
+                            </small>
+                            <div class="col-1 mt-2 p-0">
+                                <img
+                                    style="width: 100%"
+                                    [src]="imageDisplay"
+                                    alt="Image"
+                                    *ngIf="imageDisplay"
+                                />
+                            </div>
+
+                            <!-- <p-fileUpload
+                                name="demo[]"
+                                (onUpload)="onImageUpload($event)"
+                                [multiple]="false"
+                                accept="image/*"
+                            >
+                                <ng-template pTemplate="content">
+                                    <ul *ngIf="uploadedFiles.length">
+                                        <li *ngFor="let file of uploadedFiles">
+                                            {{ file.name }} -
+                                            {{ file.size }} bytes
+                                        </li>
+                                    </ul>
+                                </ng-template>
+                            </p-fileUpload> -->
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </p-card>
+</div>

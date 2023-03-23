@@ -15,11 +15,11 @@
         "skipDefaultLibCheck": true,
         "baseUrl": ".",
         "paths": {
+            "@env/*": ["environments/*"],
             "@lib/orders": ["libs/orders/src/index.ts"],
             "@lib/products": ["libs/products/src/index.ts"],
             "@lib/ui": ["libs/ui/src/index.ts"],
-            "@lib/users": ["libs/users/src/index.ts"],
-            "@env/*": ["environments/*"]
+            "@lib/users": ["libs/users/src/index.ts"]
         },
         "strictPropertyInitialization": false
     },
