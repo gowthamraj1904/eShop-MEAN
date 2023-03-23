@@ -15,7 +15,10 @@
                 "polyfills": ["zone.js"],
                 "tsConfig": "apps/e-shop/tsconfig.app.json",
                 "inlineStyleLanguage": "scss",
-                "assets": ["apps/e-shop/src/favicon.ico", "apps/e-shop/src/assets"],
+                "assets": [
+                    "apps/e-shop/src/favicon.ico",
+                    "apps/e-shop/src/assets"
+                ],
                 "styles": ["apps/e-shop/src/styles.scss"],
                 "scripts": []
             },
@@ -33,7 +36,13 @@
                             "maximumError": "4kb"
                         }
                     ],
-                    "outputHashing": "all"
+                    "outputHashing": "all",
+                    "fileReplacements": [
+                        {
+                            "replace": "environments/environment.ts",
+                            "with": "environments/environment.prod.ts"
+                        }
+                    ]
                 },
                 "development": {
                     "buildOptimizer": false,
@@ -68,7 +77,10 @@
             "executor": "@nrwl/linter:eslint",
             "outputs": ["{options.outputFile}"],
             "options": {
-                "lintFilePatterns": ["apps/e-shop/**/*.ts", "apps/e-shop/**/*.html"]
+                "lintFilePatterns": [
+                    "apps/e-shop/**/*.ts",
+                    "apps/e-shop/**/*.html"
+                ]
             }
         },
         "test": {

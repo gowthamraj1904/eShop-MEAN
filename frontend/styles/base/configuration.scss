@@ -11,3 +11,11 @@ a {
 ul {
     @include reset-list;
 }
+
+button,
+input,
+optgroup,
+select,
+textarea {
+    line-height: normal;
+}

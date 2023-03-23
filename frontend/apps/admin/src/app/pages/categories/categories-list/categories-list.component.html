@@ -1,0 +1,74 @@
+<div class="categories-list-wrapper">
+    <p-toast></p-toast>
+    <p-confirmDialog></p-confirmDialog>
+    <div class="admin-page">
+        <p-card header="Categories" subheader="List of all categories">
+            <div class="grid">
+                <div class="col-12">
+                    <p-toolbar>
+                        <div class="p-toolbar-group-left">
+                            <p-button
+                                label="New"
+                                icon="pi pi-plus"
+                                styleClass="p-button-success"
+                                routerLink="form"
+                            ></p-button>
+                        </div>
+                    </p-toolbar>
+                </div>
+            </div>
+            <div class="grid">
+                <div class="col-12">
+                    <p-table
+                        [value]="categories"
+                        styleClass="p-datatable-gridlines"
+                    >
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th pSortableColumn="name">
+                                    Name <p-sortIcon field="name"></p-sortIcon>
+                                </th>
+                                <th>Icon</th>
+                                <th>Color</th>
+                                <th></th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-category>
+                            <tr>
+                                <td>{{ category.name }}</td>
+                                <td>
+                                    <i
+                                        class="category-icon mr-2"
+                                        [ngClass]="category.icon"
+                                    ></i>
+                                    {{ category.icon }}
+                                </td>
+                                <td>
+                                    <span
+                                        class="category-color-icon mr-2"
+                                        [ngStyle]="{
+                                            'background-color': category.color
+                                        }"
+                                    ></span>
+                                    {{ category.color }}
+                                </td>
+                                <td>
+                                    <p-button
+                                        icon="pi pi-trash"
+                                        styleClass="p-button-danger mr-2"
+                                        (click)="onDeleteCategory(category.id)"
+                                    ></p-button>
+                                    <p-button
+                                        icon="pi pi-pencil"
+                                        styleClass="p-button-success"
+                                        (click)="onEditCategory(category.id)"
+                                    ></p-button>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+        </p-card>
+    </div>
+</div>
