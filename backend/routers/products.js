@@ -49,9 +49,7 @@ router.get(`/`, async (req, res) => {
         filter.category = req.query?.categories.split(',');
     }
 
-    const products = await Product.find(
-        filter.category.length > 0 ? filter : null
-    );
+    const products = await Product.find(filter.category.length > 0 ? filter : null).populate('category');
 
     if (!products) {
         res.status(500).json({ status: false });
@@ -161,7 +159,7 @@ router.put('/:id', uploadOptions.single('image'), async (req, res) => {
 
         imagePath = `${basePath}${fileName}`;
     } else {
-        imagePath = product.image;
+        imagePath = req.body.image;
     }
 
     const product = {

@@ -1,8 +1,8 @@
-<div class="categories-list-wrapper">
+<div class="products-list-wrapper">
     <p-toast></p-toast>
     <p-confirmDialog></p-confirmDialog>
     <div class="admin-page">
-        <p-card header="Categories" subheader="List of all categories">
+        <p-card header="Products" subheader="List of all products">
             <div class="grid">
                 <div class="col-12">
                     <p-toolbar>
@@ -20,7 +20,7 @@
             <div class="grid">
                 <div class="col-12">
                     <p-table
-                        [value]="categories"
+                        [value]="products"
                         styleClass="p-datatable-gridlines"
                         [paginator]="true"
                         [rows]="5"
@@ -33,40 +33,58 @@
                                 <th pSortableColumn="name">
                                     Name <p-sortIcon field="name"></p-sortIcon>
                                 </th>
-                                <th>Icon</th>
-                                <th>Color</th>
+                                <th>Image</th>
+                                <th pSortableColumn="price">
+                                    Price
+                                    <p-sortIcon field="price"></p-sortIcon>
+                                </th>
+                                <th>Category</th>
+                                <th pSortableColumn="rating">
+                                    Rating
+                                    <p-sortIcon field="rating"></p-sortIcon>
+                                </th>
+                                <th pSortableColumn="countInStock">
+                                    Stock Count
+                                    <p-sortIcon
+                                        field="countInStock"
+                                    ></p-sortIcon>
+                                </th>
+                                <th pSortableColumn="dateCreated">
+                                    Created
+                                    <p-sortIcon
+                                        field="dateCreated"
+                                    ></p-sortIcon>
+                                </th>
                                 <th></th>
                             </tr>
                         </ng-template>
-                        <ng-template pTemplate="body" let-category>
+                        <ng-template pTemplate="body" let-product>
                             <tr>
-                                <td>{{ category.name }}</td>
+                                <td>{{ product.name }}</td>
                                 <td>
-                                    <i
-                                        class="category-icon mr-2"
-                                        [ngClass]="category.icon"
-                                    ></i>
-                                    {{ category.icon }}
+                                    <img
+                                        style="width: 100%"
+                                        [src]="product.image"
+                                        [alt]="product.name"
+                                    />
                                 </td>
+                                <td>{{ product.price }}</td>
+                                <td>{{ product.category?.name }}</td>
+                                <td>{{ product.rating }}</td>
+                                <td>{{ product.countInStock }}</td>
                                 <td>
-                                    <span
-                                        class="category-color-icon mr-2"
-                                        [ngStyle]="{
-                                            'background-color': category.color
-                                        }"
-                                    ></span>
-                                    {{ category.color }}
+                                    {{ product.dateCreated | date : 'short' }}
                                 </td>
                                 <td>
                                     <p-button
                                         icon="pi pi-trash"
                                         styleClass="p-button-danger mr-2"
-                                        (click)="onDeleteCategory(category.id)"
+                                        (click)="onDeleteProduct(product.id)"
                                     ></p-button>
                                     <p-button
                                         icon="pi pi-pencil"
                                         styleClass="p-button-success"
-                                        (click)="onEditCategory(category.id)"
+                                        (click)="onEditProduct(product.id)"
                                     ></p-button>
                                 </td>
                             </tr>

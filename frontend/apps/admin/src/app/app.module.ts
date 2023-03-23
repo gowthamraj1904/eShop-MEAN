@@ -11,10 +11,14 @@ import { appRoutes } from './app.routes';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ShellComponent } from './shared/shell/shell.component';
 import { SideBarComponent } from './shared/side-bar/side-bar.component';
+// Categories
 import { CategoriesListComponent } from './pages/categories/categories-list/categories-list.component';
 import { CategoriesFormComponent } from './pages/categories/categories-form/categories-form.component';
+// Products
+import { ProductsListComponent } from './pages/products/products-list/products-list.component';
+import { ProductsFormComponent } from './pages/products/products-form/products-form.component';
 
-import { CategoriesService } from '@lib/products';
+import { CategoriesService, ProductsService } from '@lib/products';
 
 import { CardModule } from 'primeng/card';
 import { ToolbarModule } from 'primeng/toolbar';
@@ -25,6 +29,12 @@ import { ToastModule } from 'primeng/toast';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ColorPickerModule } from 'primeng/colorpicker';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { InputSwitchModule } from 'primeng/inputswitch';
+import { DropdownModule } from 'primeng/dropdown';
+import { EditorModule } from 'primeng/editor';
+import { FileUploadModule } from 'primeng/fileupload';
 
 const UX_MODULE = [
     ToolbarModule,
@@ -34,7 +44,13 @@ const UX_MODULE = [
     InputTextModule,
     ToastModule,
     ConfirmDialogModule,
-    ColorPickerModule
+    ColorPickerModule,
+    InputNumberModule,
+    InputTextareaModule,
+    InputSwitchModule,
+    DropdownModule,
+    EditorModule,
+    FileUploadModule
 ];
 
 @NgModule({
@@ -44,7 +60,9 @@ const UX_MODULE = [
         ShellComponent,
         SideBarComponent,
         CategoriesListComponent,
-        CategoriesFormComponent
+        CategoriesFormComponent,
+        ProductsListComponent,
+        ProductsFormComponent
     ],
     imports: [
         BrowserModule,
@@ -57,7 +75,12 @@ const UX_MODULE = [
         }),
         ...UX_MODULE
     ],
-    providers: [CategoriesService, MessageService, ConfirmationService],
+    providers: [
+        MessageService,
+        ConfirmationService,
+        CategoriesService,
+        ProductsService
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {}
