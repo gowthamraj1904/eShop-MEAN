@@ -1,0 +1,95 @@
+<div class="login-register">
+    <div class="login-register-panel">
+        <div class="grid">
+            <div class="col-6">
+                <img
+                    class="login-image"
+                    src="assets/images/login-page.jpg"
+                    alt="Image"
+                />
+            </div>
+            <div class="col-6 p-5">
+                <h3>Welcome</h3>
+                <h2>Login Page</h2>
+                <form [formGroup]="form">
+                    <div class="grid">
+                        <div class="col-12 mt-6">
+                            <div class="mb-4">
+                                <div class="p-inputgroup">
+                                    <span class="p-inputgroup-addon">
+                                        <i class="pi pi-user"></i>
+                                    </span>
+                                    <input
+                                        pInputText
+                                        styleClass="w-full"
+                                        placeholder="Email"
+                                        formControlName="email"
+                                        aria-describedby="email-help"
+                                    />
+                                </div>
+                                <small
+                                    id="email-help"
+                                    class="p-error"
+                                    *ngIf="
+                                        form.controls['email'].invalid &&
+                                        isSubmitted
+                                    "
+                                >
+                                    <span
+                                        *ngIf="
+                                            form.controls['email']?.errors
+                                                ?.['required']
+                                        "
+                                        >Email is required</span
+                                    >
+                                    <span
+                                        *ngIf="
+                                            form.controls['email']?.errors
+                                                ?.['email']
+                                        "
+                                        >Email is invalid</span
+                                    >
+                                </small>
+                            </div>
+                            <div class="mb-2">
+                                <div class="p-inputgroup">
+                                    <span class="p-inputgroup-addon">
+                                        <i class="pi pi-lock"></i>
+                                    </span>
+                                    <input
+                                        type="password"
+                                        pInputText
+                                        placeholder="Password"
+                                        formControlName="password"
+                                        aria-describedby="password-help"
+                                    />
+                                </div>
+                                <small
+                                    id="password-help"
+                                    class="p-error"
+                                    *ngIf="
+                                        form.controls['password'].invalid &&
+                                        isSubmitted
+                                    "
+                                    >Password is required</small
+                                >
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <p-button
+                                label="Login"
+                                styleClass="w-full"
+                                (onClick)="onLogin()"
+                            ></p-button>
+                        </div>
+                        <div class="col-12" *ngIf="isAuthError">
+                            <small class="p-error">{{
+                                authErrorMessage
+                            }}</small>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
