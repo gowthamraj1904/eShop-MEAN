@@ -221,10 +221,11 @@ router.delete('/:id', (req, res) => {
 router.get(`/get/count`, async (req, res) => {
     // Get all the count - Product.countDocuments();
     // Get product count with rating is greater then 2
-    const productsCount = await Product.countDocuments(
-        { rating: { $gt: 2 } },
-        { limit: 100 }
-    );
+    // const productsCount = await Product.countDocuments(
+    //     { rating: { $gt: 2 } },
+    //     { limit: 100 }
+    // );
+    const productsCount = await Product.countDocuments();
 
     if (!productsCount) {
         const response = {

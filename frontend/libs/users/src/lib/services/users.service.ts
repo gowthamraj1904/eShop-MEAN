@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { environment } from '@env/environment';
 import { User } from '../models/users.model';
 import * as countriesLib from 'i18n-iso-countries';
@@ -37,6 +37,12 @@ export class UsersService {
         return this.http.delete<Record<string, string>>(
             `${this.apiUrl}/${userId}`
         );
+    }
+
+    getUsersCount(): Observable<number> {
+        return this.http
+            .get<number>(`${this.apiUrl}/get/count`)
+            .pipe(map((objectValue: any) => objectValue.usersCount));
     }
 
     getCountries(): Record<string, string>[] {
