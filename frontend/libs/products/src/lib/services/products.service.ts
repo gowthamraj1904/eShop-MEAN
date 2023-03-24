@@ -4,9 +4,7 @@ import { environment } from '@env/environment';
 import { Observable } from 'rxjs';
 import { Product } from '../models/product.model';
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable()
 export class ProductsService {
     apiUrl = `${environment.apiUrl}/products`;
 

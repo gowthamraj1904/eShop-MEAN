@@ -1,0 +1,107 @@
+<p-toast></p-toast>
+<p-confirmDialog></p-confirmDialog>
+<div class="admin-page">
+    <p-card header="Users" subheader="List of all users">
+        <div class="grid">
+            <div class="col-12">
+                <p-toolbar>
+                    <div class="p-toolbar-group-left">
+                        <p-button
+                            label="New"
+                            icon="pi pi-plus"
+                            styleClass="p-button-success"
+                            routerLink="form"
+                        ></p-button>
+                    </div>
+                </p-toolbar>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col-12">
+                <p-table
+                    [value]="users"
+                    styleClass="p-datatable-gridlines"
+                    [paginator]="true"
+                    [rows]="10"
+                    [showCurrentPageReport]="true"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                    [rowsPerPageOptions]="[10, 25, 50]"
+                >
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th pSortableColumn="name">
+                                Name <p-sortIcon field="name"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="email">
+                                Email <p-sortIcon field="email"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="phone">
+                                Phone <p-sortIcon field="phone"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="street">
+                                Street <p-sortIcon field="street"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="apartment">
+                                Apartment
+                                <p-sortIcon field="apartment"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="city">
+                                City <p-sortIcon field="city"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="zip">
+                                Zip <p-sortIcon field="zip"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="country">
+                                Country
+                                <p-sortIcon field="country"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="isAdmin">
+                                Is Admin
+                                <p-sortIcon field="isAdmin"></p-sortIcon>
+                            </th>
+                            <th></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-user>
+                        <tr>
+                            <td>{{ user.name }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ user.phone }}</td>
+                            <td>{{ user.street }}</td>
+                            <td>{{ user.apartment }}</td>
+                            <td>{{ user.city }}</td>
+                            <td>{{ user.zip }}</td>
+                            <td>{{ user.country }}</td>
+                            <td>
+                                <p-tag
+                                    icon="pi pi-user"
+                                    value="Admin"
+                                    severity="success"
+                                    *ngIf="user.isAdmin"
+                                ></p-tag>
+                                <p-tag
+                                    icon="pi pi-user"
+                                    value="User"
+                                    severity="primary"
+                                    *ngIf="!user.isAdmin"
+                                ></p-tag>
+                            </td>
+                            <td>
+                                <p-button
+                                    icon="pi pi-trash"
+                                    styleClass="p-button-danger mr-2"
+                                    (click)="onDeleteUser(user.id)"
+                                ></p-button>
+                                <p-button
+                                    icon="pi pi-pencil"
+                                    styleClass="p-button-success"
+                                    (click)="onEditUser(user.id)"
+                                ></p-button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </p-card>
+</div>

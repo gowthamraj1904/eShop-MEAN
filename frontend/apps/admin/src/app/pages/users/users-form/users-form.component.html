@@ -1,0 +1,253 @@
+<p-toast></p-toast>
+<div class="admin-page">
+    <p-card
+        [header]="isEditMode ? 'Edit User' : 'Add User'"
+        subheader="You can add or edit user"
+    >
+        <div class="grid mb-4">
+            <div class="col-12">
+                <p-toolbar>
+                    <div class="p-toolbar-group-left"></div>
+                    <div class="p-toolbar-group-right">
+                        <p-button
+                            [label]="isEditMode ? 'Update' : 'Create'"
+                            icon="pi pi-plus"
+                            styleClass="p-button-primary mr-2"
+                            (click)="onSubmit()"
+                        ></p-button>
+                        <p-button
+                            label="Cancel"
+                            icon="pi pi-arrow-left"
+                            styleClass="p-button-secondary"
+                            (click)="onCancel()"
+                        ></p-button>
+                    </div>
+                </p-toolbar>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col-12">
+                <form [formGroup]="form">
+                    <div class="formgrid grid">
+                        <div class="field col-4">
+                            <label for="name">Name</label>
+                            <input
+                                id="name"
+                                type="text"
+                                class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+                                formControlName="name"
+                                aria-describedby="name-help"
+                            />
+                            <small
+                                id="name-help"
+                                class="p-error"
+                                *ngIf="
+                                    form.controls['name'].invalid && isSubmitted
+                                "
+                                >Name is required</small
+                            >
+                        </div>
+                        <div class="field col-4">
+                            <label for="email">Email</label>
+                            <input
+                                id="email"
+                                type="email"
+                                class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+                                formControlName="email"
+                                aria-describedby="email-help"
+                            />
+                            <small
+                                id="email-help"
+                                class="p-error"
+                                *ngIf="
+                                    form.controls['email'].invalid &&
+                                    isSubmitted
+                                "
+                            >
+                                <span
+                                    *ngIf="
+                                        form.controls['email'].errors?.[
+                                            'required'
+                                        ]
+                                    "
+                                    >Email is required</span
+                                >
+                                <span
+                                    *ngIf="
+                                        form.controls['email'].errors?.[
+                                            'email'
+                                        ]
+                                    "
+                                    >Email is invalid</span
+                                >
+                            </small>
+                        </div>
+                        <div class="field col-4">
+                            <label for="password" class="block">Password</label>
+                            <p-password
+                                id="password"
+                                formControlName="password"
+                                aria-describedby="password-help"
+                                styleClass="w-full"
+                                class="w-full"
+                                [feedback]="true"
+                                [toggleMask]="true"
+                            >
+                                <ng-template pTemplate="footer">
+                                    <p-divider></p-divider>
+                                    <p class="mt-2">Suggestions</p>
+                                    <ul
+                                        class="pl-2 ml-2 mt-0"
+                                        style="line-height: 1.5"
+                                    >
+                                        <li>At least one lowercase</li>
+                                        <li>At least one uppercase</li>
+                                        <li>At least one numeric</li>
+                                        <li>Minimum 8 characters</li>
+                                    </ul>
+                                </ng-template>
+                            </p-password>
+                            <small
+                                id="password-help"
+                                class="p-error"
+                                *ngIf="
+                                    form.controls['password'].invalid &&
+                                    isSubmitted
+                                "
+                                >Password is required</small
+                            >
+                        </div>
+                        <div class="field col-4">
+                            <label for="phone" class="block">Phone</label>
+                            <p-inputMask
+                                styleClass="w-full"
+                                id="phone"
+                                mask="999-999-9999"
+                                formControlName="phone"
+                                aria-describedby="phone-help"
+                                placeholder="999-999-9999"
+                            ></p-inputMask>
+                            <small
+                                id="phone-help"
+                                class="p-error"
+                                *ngIf="
+                                    form.controls['phone'].invalid &&
+                                    isSubmitted
+                                "
+                                >Phone is required</small
+                            >
+                        </div>
+                        <div class="field col-4">
+                            <label for="is-admin">Is Admin</label>
+                            <br />
+                            <p-inputSwitch
+                                id="is-admin"
+                                formControlName="isAdmin"
+                            ></p-inputSwitch>
+                        </div>
+                    </div>
+                    <div class="formgrid grid">
+                        <div class="field col-4">
+                            <label for="phone">Apartment</label>
+                            <input
+                                id="apartment"
+                                type="text"
+                                class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+                                formControlName="apartment"
+                                aria-describedby="apartment-help"
+                            />
+                            <small
+                                id="apartment-help"
+                                class="p-error"
+                                *ngIf="
+                                    form.controls['apartment'].invalid &&
+                                    isSubmitted
+                                "
+                                >Apartment is required</small
+                            >
+                        </div>
+                        <div class="field col-4">
+                            <label for="phone">Street</label>
+                            <input
+                                id="street"
+                                type="text"
+                                class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+                                formControlName="street"
+                                aria-describedby="street-help"
+                            />
+                            <small
+                                id="street-help"
+                                class="p-error"
+                                *ngIf="
+                                    form.controls['street'].invalid &&
+                                    isSubmitted
+                                "
+                                >Street is required</small
+                            >
+                        </div>
+                        <div class="field col-4">
+                            <label for="phone">City</label>
+                            <input
+                                id="city"
+                                type="text"
+                                class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+                                formControlName="city"
+                                aria-describedby="city-help"
+                            />
+                            <small
+                                id="city-help"
+                                class="p-error"
+                                *ngIf="
+                                    form.controls['city'].invalid && isSubmitted
+                                "
+                                >City is required</small
+                            >
+                        </div>
+                        <div class="field col-4">
+                            <label for="phone">Zip Code</label>
+                            <input
+                                id="zip"
+                                type="text"
+                                class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+                                formControlName="zip"
+                                aria-describedby="zip-help"
+                            />
+                            <small
+                                id="zip-help"
+                                class="p-error"
+                                *ngIf="
+                                    form.controls['zip'].invalid && isSubmitted
+                                "
+                                >Zip is required</small
+                            >
+                        </div>
+                        <div class="field col-4">
+                            <label for="phone">Country</label>
+                            <p-dropdown
+                                [filter]="true"
+                                filterBy="name"
+                                [showClear]="true"
+                                placeholder="Select a Country"
+                                formControlName="country"
+                                [options]="countries"
+                                optionLabel="name"
+                                optionValue="code"
+                                styleClass="w-full"
+                                aria-describedby="country-help"
+                            ></p-dropdown>
+                            <small
+                                id="country-help"
+                                class="p-error"
+                                *ngIf="
+                                    form.controls['country'].invalid &&
+                                    isSubmitted
+                                "
+                                >Country is required</small
+                            >
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </p-card>
+</div>

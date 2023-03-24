@@ -52,8 +52,6 @@ export class CategoriesFormComponent implements OnInit {
                     icon: category.icon,
                     color: category.color
                 });
-
-                console.log(this.form);
             });
     }
 

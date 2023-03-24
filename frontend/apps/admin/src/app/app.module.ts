@@ -17,8 +17,11 @@ import { CategoriesFormComponent } from './pages/categories/categories-form/cate
 // Products
 import { ProductsListComponent } from './pages/products/products-list/products-list.component';
 import { ProductsFormComponent } from './pages/products/products-form/products-form.component';
-
 import { CategoriesService, ProductsService } from '@lib/products';
+
+import { UsersListComponent } from './pages/users/users-list/users-list.component';
+import { UsersFormComponent } from './pages/users/users-form/users-form.component';
+import { UsersService } from '@lib/users';
 
 import { CardModule } from 'primeng/card';
 import { ToolbarModule } from 'primeng/toolbar';
@@ -35,6 +38,10 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import { DropdownModule } from 'primeng/dropdown';
 import { EditorModule } from 'primeng/editor';
 import { FileUploadModule } from 'primeng/fileupload';
+import { TagModule } from 'primeng/tag';
+import { InputMaskModule } from 'primeng/inputmask';
+import { PasswordModule } from 'primeng/password';
+import { DividerModule } from 'primeng/divider';
 
 const UX_MODULE = [
     ToolbarModule,
@@ -50,7 +57,11 @@ const UX_MODULE = [
     InputSwitchModule,
     DropdownModule,
     EditorModule,
-    FileUploadModule
+    FileUploadModule,
+    TagModule,
+    InputMaskModule,
+    PasswordModule,
+    DividerModule
 ];
 
 @NgModule({
@@ -62,7 +73,9 @@ const UX_MODULE = [
         CategoriesListComponent,
         CategoriesFormComponent,
         ProductsListComponent,
-        ProductsFormComponent
+        ProductsFormComponent,
+        UsersListComponent,
+        UsersFormComponent
     ],
     imports: [
         BrowserModule,
@@ -79,7 +92,8 @@ const UX_MODULE = [
         MessageService,
         ConfirmationService,
         CategoriesService,
-        ProductsService
+        ProductsService,
+        UsersService
     ],
     bootstrap: [AppComponent]
 })
