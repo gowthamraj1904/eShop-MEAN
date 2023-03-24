@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
@@ -21,7 +21,7 @@ import { CategoriesService, ProductsService } from '@lib/products';
 
 import { UsersListComponent } from './pages/users/users-list/users-list.component';
 import { UsersFormComponent } from './pages/users/users-form/users-form.component';
-import { UsersService } from '@lib/users';
+import { JwtInterceptor, UsersModule, UsersService } from '@lib/users';
 
 import { OrdersListComponent } from './pages/orders/orders-list/orders-list.component';
 import { OrdersDetailComponent } from './pages/orders/orders-detail/orders-detail.component';
@@ -94,6 +94,7 @@ const UX_MODULE = [
         RouterModule.forRoot(appRoutes, {
             initialNavigation: 'enabledBlocking'
         }),
+        UsersModule,
         ...UX_MODULE
     ],
     providers: [
@@ -102,7 +103,12 @@ const UX_MODULE = [
         CategoriesService,
         ProductsService,
         UsersService,
-        OrdersService
+        OrdersService,
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: JwtInterceptor,
+            multi: true
+        }
     ],
     bootstrap: [AppComponent]
 })
