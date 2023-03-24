@@ -23,6 +23,10 @@ import { UsersListComponent } from './pages/users/users-list/users-list.componen
 import { UsersFormComponent } from './pages/users/users-form/users-form.component';
 import { UsersService } from '@lib/users';
 
+import { OrdersListComponent } from './pages/orders/orders-list/orders-list.component';
+import { OrdersDetailComponent } from './pages/orders/orders-detail/orders-detail.component';
+import { OrdersService } from '@lib/orders';
+
 import { CardModule } from 'primeng/card';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ButtonModule } from 'primeng/button';
@@ -42,6 +46,7 @@ import { TagModule } from 'primeng/tag';
 import { InputMaskModule } from 'primeng/inputmask';
 import { PasswordModule } from 'primeng/password';
 import { DividerModule } from 'primeng/divider';
+import { FieldsetModule } from 'primeng/fieldset';
 
 const UX_MODULE = [
     ToolbarModule,
@@ -61,7 +66,8 @@ const UX_MODULE = [
     TagModule,
     InputMaskModule,
     PasswordModule,
-    DividerModule
+    DividerModule,
+    FieldsetModule
 ];
 
 @NgModule({
@@ -75,7 +81,9 @@ const UX_MODULE = [
         ProductsListComponent,
         ProductsFormComponent,
         UsersListComponent,
-        UsersFormComponent
+        UsersFormComponent,
+        OrdersListComponent,
+        OrdersDetailComponent
     ],
     imports: [
         BrowserModule,
@@ -93,7 +101,8 @@ const UX_MODULE = [
         ConfirmationService,
         CategoriesService,
         ProductsService,
-        UsersService
+        UsersService,
+        OrdersService
     ],
     bootstrap: [AppComponent]
 })
