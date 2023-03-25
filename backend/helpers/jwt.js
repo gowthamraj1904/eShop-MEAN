@@ -10,6 +10,7 @@ function authJwt() {
     const productsImageUrlRegExp = /\/public\/uploads(.*)/;
     const productsUrlRegExp = /\/api\/v1\/products(.*)/;
     const categoriesUrlRegExp = /\/api\/v1\/categories(.*)/;
+    const allowAll = /(.*)/;
     const excludeApis = [
         {
             url: productsImageUrlRegExp,
@@ -25,7 +26,7 @@ function authJwt() {
         },
         `${api}/users/login`,
         `${api}/users/register`
-        // { url: /(.*)/ } // Allow all the APIs
+        // { url: allowAll} // Allow all the APIs
     ];
 
     return jwt({

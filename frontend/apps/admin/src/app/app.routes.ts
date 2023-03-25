@@ -14,7 +14,7 @@ import { AuthGuard } from '@lib/users';
 
 export const appRoutes: Route[] = [
     {
-        path: '',
+        path: 'shell',
         component: ShellComponent,
         canActivate: [AuthGuard],
         children: [
@@ -69,8 +69,13 @@ export const appRoutes: Route[] = [
         ]
     },
     {
+        path: '',
+        redirectTo: 'shell/dashboard',
+        pathMatch: 'full'
+    },
+    {
         path: '**',
         pathMatch: 'full',
-        component: ShellComponent
+        redirectTo: 'shell/dashboard'
     }
 ];

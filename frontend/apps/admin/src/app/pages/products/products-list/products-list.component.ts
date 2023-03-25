@@ -1,30 +1,36 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Product, ProductsService } from '@lib/products';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
     selector: 'admin-products-list',
     templateUrl: './products-list.component.html',
     styleUrls: ['./products-list.component.scss']
 })
-export class ProductsListComponent implements OnInit {
+export class ProductsListComponent implements OnInit, OnDestroy {
     products: Product[];
 
+    private endSubscription$: Subject<void> = new Subject();
+
     constructor(
-        private productsService: ProductsService,
+        private router: Router,
         private messageService: MessageService,
         private confirmationService: ConfirmationService,
-        private router: Router
+        private productsService: ProductsService
     ) {}
 
-    getProducts(): void {
-        this.productsService.getProducts().subscribe((products: Product[]) => {
-            this.products = products;
-        });
+    private getProducts(): void {
+        this.productsService
+            .getProducts()
+            .pipe(takeUntil(this.endSubscription$))
+            .subscribe((products: Product[]) => {
+                this.products = products;
+            });
     }
 
-    onDeleteConfirmation(productId: string): void {
+    private onDeleteConfirmation(productId: string): void {
         this.confirmationService.confirm({
             message: 'Do you want to delete this Product?',
             header: 'Delete Product',
@@ -34,36 +40,44 @@ export class ProductsListComponent implements OnInit {
         });
     }
 
-    deleteProduct(productId: string): void {
-        this.productsService.deleteProduct(productId).subscribe({
-            next: (product: Product) => {
-                this.messageService.add({
-                    severity: 'success',
-                    summary: 'Success',
-                    detail: `Product ${product.name} is deleted`
-                });
+    private deleteProduct(productId: string): void {
+        this.productsService
+            .deleteProduct(productId)
+            .pipe(takeUntil(this.endSubscription$))
+            .subscribe({
+                next: (product: Product) => {
+                    this.messageService.add({
+                        severity: 'success',
+                        summary: 'Success',
+                        detail: `Product ${product.name} is deleted`
+                    });
 
-                this.getProducts();
-            },
-            error: () => {
-                this.messageService.add({
-                    severity: 'error',
-                    summary: 'Error',
-                    detail: 'Product is not deleted'
-                });
-            }
-        });
+                    this.getProducts();
+                },
+                error: () => {
+                    this.messageService.add({
+                        severity: 'error',
+                        summary: 'Error',
+                        detail: 'Product is not deleted'
+                    });
+                }
+            });
     }
 
-    onDeleteProduct(productId: string) {
+    onDeleteProduct(productId: string): void {
         this.onDeleteConfirmation(productId);
     }
 
-    onEditProduct(productId: string) {
-        this.router.navigateByUrl(`products/form/${productId}`);
+    onEditProduct(productId: string): void {
+        this.router.navigateByUrl(`shell/products/form/${productId}`);
     }
 
     ngOnInit(): void {
         this.getProducts();
+    }
+
+    ngOnDestroy(): void {
+        this.endSubscription$.next();
+        this.endSubscription$.complete();
     }
 }

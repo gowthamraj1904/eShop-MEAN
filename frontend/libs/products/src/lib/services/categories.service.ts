@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '@env/environment';
 import { Observable } from 'rxjs';
 import { Category } from '../models/category.model';
-import { environment } from '@env/environment';
 
 @Injectable()
 export class CategoriesService {
@@ -18,7 +18,7 @@ export class CategoriesService {
         return this.http.get<Category>(`${this.apiUrl}/${categoryId}`);
     }
 
-    createCategories(category: Category): Observable<Category> {
+    createCategory(category: Category): Observable<Category> {
         return this.http.post<Category>(this.apiUrl, category);
     }
 
@@ -29,9 +29,7 @@ export class CategoriesService {
         );
     }
 
-    deleteCategory(categoryId: string): Observable<Record<string, string>> {
-        return this.http.delete<Record<string, string>>(
-            `${this.apiUrl}/${categoryId}`
-        );
+    deleteCategory(categoryId: string): Observable<any> {
+        return this.http.delete<any>(`${this.apiUrl}/${categoryId}`);
     }
 }

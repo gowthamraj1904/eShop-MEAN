@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 const TOKEN = 'jwtToken';
 
 @Injectable()
-export class LocalstorageService {
+export class LocalStorageService {
     setToken(data: any): void {
         localStorage.setItem(TOKEN, data);
     }

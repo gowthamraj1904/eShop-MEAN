@@ -1,22 +1,29 @@
-export const ORDER_STATUS: any = {
-    pending: {
+import { OrderStatus } from './models/order-status.model';
+
+export const ORDER_STATUS: OrderStatus[] = [
+    {
+        code: 'pending',
         label: 'Pending',
         color: 'primary'
     },
-    processed: {
+    {
+        code: 'processed',
         label: 'Processed',
         color: 'warning'
     },
-    shipped: {
+    {
+        code: 'shipped',
         label: 'Shipped',
         color: 'warning'
     },
-    delivered: {
+    {
+        code: 'delivered',
         label: 'Delivered',
         color: 'success'
     },
-    failed: {
+    {
+        code: 'failed',
         label: 'Failed',
         color: 'danger'
     }
-};
+];

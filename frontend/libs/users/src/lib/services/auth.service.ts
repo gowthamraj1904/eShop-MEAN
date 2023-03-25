@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '@env/environment';
 import { Observable } from 'rxjs';
-import { User } from '../models/users.model';
-import { LocalstorageService } from './localstorage.service';
+import { Login } from '../models/login.model';
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable()
 export class AuthService {
@@ -12,25 +12,19 @@ export class AuthService {
 
     constructor(
         private http: HttpClient,
-        private localstorageService: LocalstorageService,
+        private localStorageService: LocalStorageService,
         private router: Router
     ) {}
 
-    login(
-        email: string,
-        password: string
-    ): Observable<{ user: string; token: string }> {
-        return this.http.post<{ user: string; token: string }>(
-            `${this.apiUrl}/login`,
-            {
-                email,
-                password
-            }
-        );
+    login(email: string, password: string): Observable<Login> {
+        return this.http.post<Login>(`${this.apiUrl}/login`, {
+            email,
+            password
+        });
     }
 
     logout(): void {
-        this.localstorageService.removeToken();
+        this.localStorageService.removeToken();
         this.router.navigate(['/login']);
     }
 }

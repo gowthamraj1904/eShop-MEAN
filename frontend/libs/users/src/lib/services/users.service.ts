@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { environment } from '@env/environment';
-import { User } from '../models/users.model';
+import { User } from '../models/user.model';
 import * as countriesLib from 'i18n-iso-countries';
 
 declare const require: any;
@@ -48,7 +48,7 @@ export class UsersService {
     getCountries(): Record<string, string>[] {
         return Object.entries(
             countriesLib.getNames('en', { select: 'official' })
-        ).map((entry) => {
+        ).map((entry: any) => {
             return {
                 code: entry[0],
                 name: entry[1]

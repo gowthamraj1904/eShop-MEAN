@@ -10,7 +10,8 @@ const userSchema = mongoose.Schema({
     apartment: { type: String, default: '' },
     city: { type: String, default: '' },
     zip: { type: String, default: '' },
-    country: { type: String, default: '' }
+    country: { type: String, default: '' },
+    dateCreated: { type: Date, default: Date.now }
 });
 
 // Default key for the id is "_id" so, we can create a virtual key "id"

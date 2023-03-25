@@ -12,13 +12,13 @@
                         <p-button
                             [label]="isEditMode ? 'Update' : 'Create'"
                             icon="pi pi-plus"
-                            styleClass="p-button-primary mr-2"
+                            styleClass="p-button-primary mr-2 p-button-sm"
                             (click)="onSubmit()"
                         ></p-button>
                         <p-button
                             label="Cancel"
                             icon="pi pi-arrow-left"
-                            styleClass="p-button-secondary"
+                            styleClass="p-button-secondary p-button-sm"
                             (click)="onCancel()"
                         ></p-button>
                     </div>
@@ -29,7 +29,7 @@
             <div class="col-12">
                 <form [formGroup]="form">
                     <div class="formgrid grid">
-                        <div class="field col-4">
+                        <div class="field col-3">
                             <label for="name">Name</label>
                             <input
                                 pInputText
@@ -48,7 +48,7 @@
                                 >Name is required</small
                             >
                         </div>
-                        <div class="field col-4">
+                        <div class="field col-3">
                             <label for="brand">Brand</label>
                             <input
                                 pInputText
@@ -68,7 +68,7 @@
                                 >Brand is required</small
                             >
                         </div>
-                        <div class="field col-4">
+                        <div class="field col-3">
                             <label for="category">Category</label>
                             <p-dropdown
                                 [filter]="true"
@@ -92,7 +92,7 @@
                                 >Category is required</small
                             >
                         </div>
-                        <div class="field col-4">
+                        <div class="field col-3">
                             <label for="price">Price</label>
                             <p-inputNumber
                                 id="price"
@@ -113,7 +113,7 @@
                                 >Price is required</small
                             >
                         </div>
-                        <div class="field col-4">
+                        <div class="field col-3">
                             <label for="stock-count">Stock Count</label>
                             <p-inputNumber
                                 type="text"
@@ -135,7 +135,7 @@
                                 >Brand is required</small
                             >
                         </div>
-                        <div class="field col-4">
+                        <div class="field col-3">
                             <label for="is-featured">Is Featured</label>
                             <br />
                             <p-inputSwitch

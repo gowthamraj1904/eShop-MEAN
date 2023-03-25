@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Order, OrdersService } from '@lib/orders';
 import { MessageService } from 'primeng/api';
+import { Subject, takeUntil } from 'rxjs';
+import { OrderStatus } from '../models/order-status.model';
 import { ORDER_STATUS } from '../order.constants';
 
 @Component({
@@ -9,31 +11,46 @@ import { ORDER_STATUS } from '../order.constants';
     templateUrl: './orders-detail.component.html',
     styleUrls: ['./orders-detail.component.scss']
 })
-export class OrdersDetailComponent implements OnInit {
+export class OrdersDetailComponent implements OnInit, OnDestroy {
     order!: Order;
-    orderId: string;
-    orderStatuses: { id: string; name: string }[] = [];
+
+    orderStatuses: OrderStatus[] = ORDER_STATUS;
+
     selectedStatus: string;
 
+    private orderId: string;
+
+    private endSubscription$: Subject<void> = new Subject();
+
     constructor(
-        private ordersService: OrdersService,
         private route: ActivatedRoute,
-        private messageService: MessageService
+        private messageService: MessageService,
+        private ordersService: OrdersService
     ) {}
 
-    mapOrderStatuses(): void {
-        this.orderStatuses = Object.keys(ORDER_STATUS).map((key) => {
-            return {
-                id: key,
-                name: ORDER_STATUS[key].label
-            };
+    private getOrderId(): void {
+        this.route.params.subscribe((params: any) => {
+            if (params?.orderId) {
+                this.orderId = params?.orderId;
+                this.getOrderById(this.orderId);
+            }
+        });
+    }
+
+    private getOrderById(orderId: string): void {
+        this.ordersService.getOrderById(orderId).subscribe((order: Order) => {
+            this.order = order;
+
+            if (order.status) {
+                this.selectedStatus = order.status;
+            }
         });
     }
 
     onStatusChange(): void {
-        console.log(this.selectedStatus);
         this.ordersService
             .updateOrder({ status: this.selectedStatus }, this.orderId)
+            .pipe(takeUntil(this.endSubscription$))
             .subscribe({
                 next: () => {
                     this.messageService.add({
@@ -52,27 +69,12 @@ export class OrdersDetailComponent implements OnInit {
             });
     }
 
-    getOrderId(): void {
-        this.route.params.subscribe((params: any) => {
-            if (params?.orderId) {
-                this.orderId = params?.orderId;
-                this.getOrderById(this.orderId);
-            }
-        });
-    }
-
-    getOrderById(orderId: string): void {
-        this.ordersService.getOrderById(orderId).subscribe((order: Order) => {
-            this.order = order;
-
-            if (order.status) {
-                this.selectedStatus = order.status;
-            }
-        });
-    }
-
     ngOnInit(): void {
-        this.mapOrderStatuses();
         this.getOrderId();
+    }
+
+    ngOnDestroy(): void {
+        this.endSubscription$.next();
+        this.endSubscription$.complete();
     }
 }

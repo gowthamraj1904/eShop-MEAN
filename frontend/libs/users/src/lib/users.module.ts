@@ -8,7 +8,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '@lib/users';
-import { LocalstorageService } from './services/localstorage.service';
+import { LocalStorageService } from './services/local-storage.service';
 
 @NgModule({
     imports: [
@@ -20,6 +20,6 @@ import { LocalstorageService } from './services/localstorage.service';
         ReactiveFormsModule
     ],
     declarations: [LoginComponent],
-    providers: [AuthService, LocalstorageService]
+    providers: [AuthService, LocalStorageService]
 })
 export class UsersModule {}

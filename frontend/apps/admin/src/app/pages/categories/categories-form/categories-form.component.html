@@ -12,13 +12,13 @@
                         <p-button
                             [label]="isEditMode ? 'Update' : 'Create'"
                             icon="pi pi-plus"
-                            styleClass="p-button-primary mr-2"
+                            styleClass="p-button-primary mr-2 p-button-sm"
                             (click)="onSubmit()"
                         ></p-button>
                         <p-button
                             label="Cancel"
                             icon="pi pi-arrow-left"
-                            styleClass="p-button-secondary"
+                            styleClass="p-button-secondary p-button-sm"
                             (click)="onCancel()"
                         ></p-button>
                     </div>
@@ -29,7 +29,7 @@
             <div class="col-12">
                 <form [formGroup]="form">
                     <div class="formgrid grid">
-                        <div class="field col">
+                        <div class="field col-3">
                             <label for="name">Name</label>
                             <input
                                 id="name"
@@ -47,7 +47,7 @@
                                 >Name is required</small
                             >
                         </div>
-                        <div class="field col">
+                        <div class="field col-3">
                             <label for="icon">Icon</label>
                             <input
                                 id="icon"
@@ -65,12 +65,20 @@
                                 >Icon is required</small
                             >
                         </div>
-                        <div class="field col">
+                        <div class="field col-3">
                             <label for="color">Color</label>
-                            <br />
-                            <p-colorPicker
-                                formControlName="color"
-                            ></p-colorPicker>
+                            <div class="color-field">
+                                <input
+                                    pInputText
+                                    formControlName="color"
+                                    [(ngModel)]="color"
+                                    class="mr-1 w-full"
+                                />
+                                <p-colorPicker
+                                    [(ngModel)]="color"
+                                    formControlName="color"
+                                ></p-colorPicker>
+                            </div>
                         </div>
                     </div>
                 </form>
