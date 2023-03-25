@@ -73,7 +73,7 @@ export class OrdersListComponent implements OnInit, OnDestroy {
     }
 
     onShowOrder(orderId: string): void {
-        this.router.navigateByUrl(`shell/orders/${orderId}`);
+        this.router.navigateByUrl(`admin/orders/${orderId}`);
     }
 
     ngOnInit(): void {

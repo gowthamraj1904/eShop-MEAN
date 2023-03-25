@@ -1,0 +1,48 @@
+<div class="admin-header-wrapper">
+    <div class="admin-header">
+        <div class="logo">
+            <a routerLink="/">e-Shop </a>
+        </div>
+        <div class="admin-menu">
+            <nav>
+                <div class="tab">
+                    <a href="javascript:" routerLink="/admin/dashboard">
+                        <i class="pi pi-home mr-2"></i>Dashboard
+                    </a>
+                </div>
+                <div class="tab">
+                    <a href="javascript:" routerLink="/admin/products">
+                        <i class="pi pi-briefcase mr-2"></i>Products
+                    </a>
+                </div>
+                <div class="tab">
+                    <a href="javascript:" routerLink="/admin/categories">
+                        <i class="pi pi-list mr-2"></i>Categories
+                    </a>
+                </div>
+                <div class="tab">
+                    <a href="javascript:" routerLink="/admin/orders">
+                        <i class="pi pi-shopping-cart mr-2"></i>Orders
+                    </a>
+                </div>
+                <div class="tab">
+                    <a href="javascript:" routerLink="/admin/users">
+                        <i class="pi pi-users mr-2"></i>Users
+                    </a>
+                </div>
+            </nav>
+        </div>
+        <div class="user-profile">
+            <div class="sign-out">
+                <a href="javascript:" (click)="onLogout()">
+                    <i class="pi pi-sign-out mr-2"></i> Logout
+                </a>
+            </div>
+            <div class="user">
+                <a href="javascript:">
+                    <i class="pi pi-user mr-2"></i> {{ user.name }}
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

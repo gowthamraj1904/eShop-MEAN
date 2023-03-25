@@ -77,7 +77,7 @@ export class UsersListComponent implements OnInit, OnDestroy {
     }
 
     onEditUser(userId: string) {
-        this.router.navigateByUrl(`shell/users/form/${userId}`);
+        this.router.navigateByUrl(`admin/users/form/${userId}`);
     }
 
     ngOnInit(): void {

@@ -14,68 +14,80 @@ import { AuthGuard } from '@lib/users';
 
 export const appRoutes: Route[] = [
     {
-        path: 'shell',
+        path: 'admin',
         component: ShellComponent,
         canActivate: [AuthGuard],
         children: [
             {
                 path: 'dashboard',
-                component: DashboardComponent
+                component: DashboardComponent,
+                title: 'Dashboard'
             },
             {
                 path: 'categories',
-                component: CategoriesListComponent
+                component: CategoriesListComponent,
+                title: 'Categories'
             },
             {
                 path: 'categories/form',
-                component: CategoriesFormComponent
+                component: CategoriesFormComponent,
+                title: 'Category'
             },
             {
                 path: 'categories/form/:categoryId',
-                component: CategoriesFormComponent
+                component: CategoriesFormComponent,
+                title: 'Category'
             },
             {
                 path: 'products',
-                component: ProductsListComponent
+                component: ProductsListComponent,
+                title: 'Products'
             },
             {
                 path: 'products/form',
-                component: ProductsFormComponent
+                component: ProductsFormComponent,
+                title: 'Product'
             },
             {
                 path: 'products/form/:productId',
-                component: ProductsFormComponent
+                component: ProductsFormComponent,
+                title: 'Product'
             },
             {
                 path: 'users',
-                component: UsersListComponent
+                component: UsersListComponent,
+                title: 'Users'
             },
             {
                 path: 'users/form',
-                component: UsersFormComponent
+                component: UsersFormComponent,
+                title: 'User'
             },
             {
                 path: 'users/form/:userId',
-                component: UsersFormComponent
+                component: UsersFormComponent,
+                title: 'User'
             },
             {
                 path: 'orders',
-                component: OrdersListComponent
+                component: OrdersListComponent,
+                title: 'Orders'
             },
             {
                 path: 'orders/:orderId',
-                component: OrdersDetailComponent
+                component: OrdersDetailComponent,
+                title: 'Order'
             }
         ]
     },
     {
         path: '',
-        redirectTo: 'shell/dashboard',
+        redirectTo: 'admin/dashboard',
         pathMatch: 'full'
     },
     {
         path: '**',
         pathMatch: 'full',
-        redirectTo: 'shell/dashboard'
+        redirectTo: 'admin/dashboard'
     }
 ];

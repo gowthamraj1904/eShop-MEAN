@@ -69,7 +69,7 @@ export class CategoriesListComponent implements OnInit, OnDestroy {
     }
 
     onEditCategory(categoryId: string): void {
-        this.router.navigateByUrl(`shell/categories/form/${categoryId}`);
+        this.router.navigateByUrl(`admin/categories/form/${categoryId}`);
     }
 
     ngOnInit(): void {
