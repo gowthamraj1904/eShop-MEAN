@@ -69,7 +69,7 @@ export class ProductsListComponent implements OnInit, OnDestroy {
     }
 
     onEditProduct(productId: string): void {
-        this.router.navigateByUrl(`shell/products/form/${productId}`);
+        this.router.navigateByUrl(`admin/products/form/${productId}`);
     }
 
     ngOnInit(): void {

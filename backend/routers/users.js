@@ -148,6 +148,8 @@ router.post(`/login`, (req, res) => {
                     // Keep these user details in the token
                     {
                         userId: user.id,
+                        email: user.email,
+                        userName: user.name,
                         isAdmin: user.isAdmin
                     },
                     secret,

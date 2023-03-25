@@ -10,17 +10,18 @@ import { appRoutes } from './app.routes';
 
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ShellComponent } from './shared/shell/shell.component';
-import { SideBarComponent } from './shared/side-bar/side-bar.component';
-// Categories
+import { HeaderComponent } from './shared/header/header.component';
+
 import { CategoriesListComponent } from './pages/categories/categories-list/categories-list.component';
 import { CategoriesFormComponent } from './pages/categories/categories-form/categories-form.component';
-// Products
+
 import { ProductsListComponent } from './pages/products/products-list/products-list.component';
 import { ProductsFormComponent } from './pages/products/products-form/products-form.component';
 import { CategoriesService, ProductsService } from '@lib/products';
 
 import { UsersListComponent } from './pages/users/users-list/users-list.component';
 import { UsersFormComponent } from './pages/users/users-form/users-form.component';
+
 import { JwtInterceptor, UsersModule, UsersService } from '@lib/users';
 
 import { OrdersListComponent } from './pages/orders/orders-list/orders-list.component';
@@ -76,7 +77,6 @@ const UX_MODULE = [
         AppComponent,
         DashboardComponent,
         ShellComponent,
-        SideBarComponent,
         CategoriesListComponent,
         CategoriesFormComponent,
         ProductsListComponent,
@@ -85,7 +85,8 @@ const UX_MODULE = [
         UsersFormComponent,
         OrdersListComponent,
         OrdersDetailComponent,
-        OrderStatusPipe
+        OrderStatusPipe,
+        HeaderComponent
     ],
     imports: [
         BrowserModule,
