@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Order, OrdersService } from '@lib/orders';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { Subject, takeUntil } from 'rxjs';
+import { OrderStatus } from '../models/order-status.model';
 import { ORDER_STATUS } from '../order.constants';
 
 @Component({
@@ -9,24 +11,30 @@ import { ORDER_STATUS } from '../order.constants';
     templateUrl: './orders-list.component.html',
     styleUrls: ['./orders-list.component.scss']
 })
-export class OrdersListComponent implements OnInit {
+export class OrdersListComponent implements OnInit, OnDestroy {
     orders: Order[];
-    orderStatus: any = ORDER_STATUS;
+
+    orderStatuses: OrderStatus[] = ORDER_STATUS;
+
+    private endSubscription$: Subject<void> = new Subject();
 
     constructor(
-        private ordersService: OrdersService,
+        private router: Router,
         private messageService: MessageService,
         private confirmationService: ConfirmationService,
-        private router: Router
+        private ordersService: OrdersService
     ) {}
 
-    getOrders(): void {
-        this.ordersService.getOrders().subscribe((orders: Order[]) => {
-            this.orders = orders;
-        });
+    private getOrders(): void {
+        this.ordersService
+            .getOrders()
+            .pipe(takeUntil(this.endSubscription$))
+            .subscribe((orders: Order[]) => {
+                this.orders = orders;
+            });
     }
 
-    onDeleteConfirmation(orderId: string): void {
+    private onDeleteConfirmation(orderId: string): void {
         this.confirmationService.confirm({
             message: 'Do you want to delete this Order?',
             header: 'Delete Order',
@@ -36,36 +44,44 @@ export class OrdersListComponent implements OnInit {
         });
     }
 
-    deleteOrder(orderId: string): void {
-        this.ordersService.deleteOrder(orderId).subscribe({
-            next: (order: Order) => {
-                this.messageService.add({
-                    severity: 'success',
-                    summary: 'Success',
-                    detail: `Order ${order.id} is deleted`
-                });
+    private deleteOrder(orderId: string): void {
+        this.ordersService
+            .deleteOrder(orderId)
+            .pipe(takeUntil(this.endSubscription$))
+            .subscribe({
+                next: (order: Order) => {
+                    this.messageService.add({
+                        severity: 'success',
+                        summary: 'Success',
+                        detail: `Order ${order.id} is deleted`
+                    });
 
-                this.getOrders();
-            },
-            error: () => {
-                this.messageService.add({
-                    severity: 'error',
-                    summary: 'Error',
-                    detail: 'Order is not deleted'
-                });
-            }
-        });
+                    this.getOrders();
+                },
+                error: () => {
+                    this.messageService.add({
+                        severity: 'error',
+                        summary: 'Error',
+                        detail: 'Order is not deleted'
+                    });
+                }
+            });
     }
 
-    onDeleteOrder(orderId: string) {
+    onDeleteOrder(orderId: string): void {
         this.onDeleteConfirmation(orderId);
     }
 
-    onShowOrder(orderId: string) {
-        this.router.navigateByUrl(`orders/${orderId}`);
+    onShowOrder(orderId: string): void {
+        this.router.navigateByUrl(`shell/orders/${orderId}`);
     }
 
     ngOnInit(): void {
         this.getOrders();
+    }
+
+    ngOnDestroy(): void {
+        this.endSubscription$.next();
+        this.endSubscription$.complete();
     }
 }

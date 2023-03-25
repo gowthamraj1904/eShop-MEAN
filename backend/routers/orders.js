@@ -3,21 +3,25 @@ const router = express.Router();
 const { Order } = require('../models/order');
 const { OrderItem } = require('../models/order-item');
 
-router.get(`/`, async (req, res) => {
+router.get(`/`, (req, res) => {
     // Populate - Get user details and the second argument is which fields are required in the Order response
-    const orders = await Order.find()
+    Order.find()
         .populate('user', 'name')
-        .sort({ dateOrdered: -1 });
-
-    if (!orders) {
-        res.status(500).json({ success: false });
-    }
-    res.status(200).send(orders);
-    return;
+        .sort({ dateOrdered: -1 })
+        .then((orders) => {
+            res.status(200).send(orders);
+        })
+        .catch((error) => {
+            const response = {
+                message: 'Orders are not available',
+                error
+            };
+            res.status(400).json(response);
+        });
 });
 
-router.get('/:id', async (req, res) => {
-    const order = await Order.findById(req.params.id)
+router.get('/:id', (req, res) => {
+    Order.findById(req.params.id)
         .populate('user', 'name')
         .populate({
             path: 'orderItems',
@@ -26,17 +30,17 @@ router.get('/:id', async (req, res) => {
                 select: 'name',
                 populate: 'category'
             }
+        })
+        .then((order) => {
+            res.status(200).send(order);
+        })
+        .catch((error) => {
+            const response = {
+                message: 'Order is not available',
+                error
+            };
+            res.status(400).json(response);
         });
-
-    if (!order) {
-        const response = {
-            success: false,
-            message: 'Order is not available'
-        };
-        res.status(500).json(response);
-    }
-
-    res.status(200).send(order);
 });
 
 router.post(`/`, async (req, res) => {
@@ -55,10 +59,7 @@ router.post(`/`, async (req, res) => {
     const orderItemsIdsResolved = await orderItemsIds;
     const totalPrices = await Promise.all(
         orderItemsIdsResolved.map(async (orderItemId) => {
-            const orderItem = await OrderItem.findById(orderItemId).populate(
-                'product',
-                'price'
-            );
+            const orderItem = await OrderItem.findById(orderItemId).populate('product', 'price');
             const totalPrice = orderItem.product.price * orderItem.quantity;
 
             return totalPrice;
@@ -81,29 +82,38 @@ router.post(`/`, async (req, res) => {
     };
     let newOrder = new Order(order);
 
-    newOrder = await newOrder.save();
-
-    if (!newOrder) {
-        res.status(404).send('The Order cannot be created');
-    }
-
-    res.status(200).send(newOrder);
+    newOrder
+        .save()
+        .then((order) => {
+            res.status(200).send(order);
+        })
+        .catch((error) => {
+            const response = {
+                message: 'The Order cannot be created',
+                error
+            };
+            res.status(400).json(response);
+        });
 });
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', (req, res) => {
     const order = {
         status: req.body.status
     };
 
-    const updateOrder = await Order.findByIdAndUpdate(req.params.id, order, {
+    Order.findByIdAndUpdate(req.params.id, order, {
         new: true
-    });
-
-    if (!updateOrder) {
-        res.status(404).send('The Order cannot be created');
-    }
-
-    res.status(200).send(updateOrder);
+    })
+        .then((order) => {
+            res.status(200).send(order);
+        })
+        .catch((error) => {
+            const response = {
+                message: 'The Order cannot be created',
+                error
+            };
+            res.status(400).json(response);
+        });
 });
 
 router.delete('/:id', (req, res) => {
@@ -113,30 +123,31 @@ router.delete('/:id', (req, res) => {
                 await order.orderItems.map(async (orderItem) => {
                     await OrderItem.findByIdAndRemove(orderItem);
                 });
+
                 const response = {
                     success: true,
                     message: 'The order is deleted'
                 };
-                return res.status(200).json(response);
+
+                res.status(200).json(response);
             } else {
                 const response = {
-                    success: false,
                     message: 'Order not found'
                 };
-                return res.status(404).json(response);
+                res.status(404).json(response);
             }
         })
-        .catch((err) => {
+        .catch((error) => {
             const response = {
-                success: false,
-                error: err
+                message: 'The Order cannot be deleted',
+                error
             };
-            return res.status(400).json(response);
+            res.status(400).json(response);
         });
 });
 
-router.get(`/get/total-sales`, async (req, res) => {
-    const totalSales = await Order.aggregate([
+router.get(`/get/total-sales`, (req, res) => {
+    Order.aggregate([
         {
             $group: {
                 _id: null,
@@ -145,40 +156,42 @@ router.get(`/get/total-sales`, async (req, res) => {
                 }
             }
         }
-    ]);
-
-    if (!totalSales) {
-        res.status(400).json({
-            message: 'The order sales cannot be generated'
+    ])
+        .then((totalSales) => {
+            const response = {
+                totalSales: totalSales.pop().totalSales
+            };
+            res.status(200).send(response);
+        })
+        .catch((error) => {
+            const response = {
+                message: 'The order sales cannot be generated',
+                error
+            };
+            res.status(400).json(response);
         });
-    }
-
-    const response = {
-        totalSales: totalSales.pop().totalSales
-    };
-    res.status(200).send(response);
-    return;
 });
 
-router.get(`/get/count`, async (req, res) => {
-    const ordersCount = await Order.countDocuments();
-
-    if (!ordersCount) {
-        const response = {
-            status: false,
-            message: 'Order is empty'
-        };
-        res.status(500).json(response);
-    }
-
-    res.status(200).send({ ordersCount });
+router.get(`/get/count`, (req, res) => {
+    Order.countDocuments()
+        .then((ordersCount) => {
+            res.status(200).send({ ordersCount });
+        })
+        .catch((error) => {
+            const response = {
+                message: 'Order is empty',
+                error
+            };
+            res.status(400).json(response);
+        });
 });
 
-router.get(`/get/user-orders/:userId`, async (req, res) => {
+router.get(`/get/user-orders/:userId`, (req, res) => {
     const filter = {
         user: req.params.userId
     };
-    const userOrders = await Order.find(filter)
+
+    Order.find(filter)
         .populate({
             path: 'orderItems',
             populate: {
@@ -187,17 +200,17 @@ router.get(`/get/user-orders/:userId`, async (req, res) => {
                 populate: 'category'
             }
         })
-        .sort({ dateOrdered: -1 });
-
-    if (!userOrders) {
-        const response = {
-            success: false
-        };
-        res.status(500).json(response);
-    }
-
-    res.status(200).send(userOrders);
-    return;
+        .sort({ dateOrdered: -1 })
+        .then((userOrders) => {
+            res.status(200).send(userOrders);
+        })
+        .catch((error) => {
+            const response = {
+                message: 'Order is empty',
+                error
+            };
+            res.status(400).json(response);
+        });
 });
 
 module.exports = router;

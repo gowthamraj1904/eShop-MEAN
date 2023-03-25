@@ -5,11 +5,12 @@
         <div class="grid">
             <div class="col-12">
                 <p-toolbar>
-                    <div class="p-toolbar-group-left">
+                    <div class="p-toolbar-group-left"></div>
+                    <div class="p-toolbar-group-right">
                         <p-button
                             label="New"
                             icon="pi pi-plus"
-                            styleClass="p-button-success"
+                            styleClass="p-button-primary p-button-sm"
                             routerLink="form"
                         ></p-button>
                     </div>
@@ -56,14 +57,13 @@
                     <ng-template pTemplate="body" let-product>
                         <tr>
                             <td>{{ product.name }}</td>
-                            <td>
+                            <td class="product-image">
                                 <img
-                                    style="width: 100%"
                                     [src]="product.image"
                                     [alt]="product.name"
                                 />
                             </td>
-                            <td>{{ product.price }}</td>
+                            <td>{{ product.price | currency}}</td>
                             <td>{{ product.category?.name }}</td>
                             <td>{{ product.rating }}</td>
                             <td>{{ product.countInStock }}</td>
@@ -73,12 +73,14 @@
                             <td>
                                 <p-button
                                     icon="pi pi-trash"
-                                    styleClass="p-button-danger mr-2"
+                                    label="Delete"
+                                    styleClass="p-button-danger mr-2 p-button-sm"
                                     (click)="onDeleteProduct(product.id)"
                                 ></p-button>
                                 <p-button
                                     icon="pi pi-pencil"
-                                    styleClass="p-button-success"
+                                    label="Edit"
+                                    styleClass="p-button-secondary p-button-sm"
                                     (click)="onEditProduct(product.id)"
                                 ></p-button>
                             </td>

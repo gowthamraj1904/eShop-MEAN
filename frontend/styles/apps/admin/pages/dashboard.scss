@@ -1,53 +1,31 @@
-.d-item {
-    display: flex;
-    text-align: center;
-    color: var(--surface-0);
-    justify-content: space-between;
-    align-items: end;
-
-    .pi {
-        font-size: 4em;
-        margin-bottom: 15px;
-    }
-
-    .name {
-        font-size: 1.4em;
-    }
-
-    .number {
-        font-size: 2em;
-        float: right;
-    }
-}
-
 .d-orders {
     background-image: linear-gradient(
-        106.9deg,
-        rgba(148, 14, 60, 1) 60.9%,
-        rgba(3, 22, 27, 1) 122.3%
+        107deg,
+        rgba(148, 14, 60, 1) 50%,
+        rgba(3, 22, 27, 1) 100%
     );
 }
 
 .d-products {
     background-image: linear-gradient(
-        83.2deg,
-        rgba(150, 93, 233, 1) 10.8%,
-        rgba(99, 88, 238, 1) 94.3%
+        107deg,
+        rgba(150, 93, 233, 1) 50%,
+        rgba(99, 88, 238, 1) 100%
     );
 }
 
 .d-users {
     background-image: linear-gradient(
-        96.5deg,
-        rgba(39, 103, 187, 1) 10.4%,
-        rgba(16, 72, 144, 1) 87.7%
+        107deg,
+        rgba(39, 103, 187, 1) 50%,
+        rgba(16, 72, 144, 1) 100%
     );
 }
 
 .d-total-sales {
     background-image: linear-gradient(
-        89.8deg,
-        rgba(222, 74, 74, 1) 4.7%,
-        rgba(30, 29, 29, 1) 120.3%
+        107deg,
+        rgba(222, 74, 74, 1) 50%,
+        rgba(30, 29, 29, 1) 100%
     );
 }

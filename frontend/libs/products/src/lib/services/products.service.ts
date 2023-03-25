@@ -32,10 +32,8 @@ export class ProductsService {
         );
     }
 
-    deleteProduct(productId: string): Observable<Record<string, string>> {
-        return this.http.delete<Record<string, string>>(
-            `${this.apiUrl}/${productId}`
-        );
+    deleteProduct(productId: string): Observable<any> {
+        return this.http.delete<any>(`${this.apiUrl}/${productId}`);
     }
 
     getProductsCount(): Observable<number> {

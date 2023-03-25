@@ -26,6 +26,7 @@ import { JwtInterceptor, UsersModule, UsersService } from '@lib/users';
 import { OrdersListComponent } from './pages/orders/orders-list/orders-list.component';
 import { OrdersDetailComponent } from './pages/orders/orders-detail/orders-detail.component';
 import { OrdersService } from '@lib/orders';
+import { OrderStatusPipe } from './pages/orders/pipes/order-status.pipe';
 
 import { CardModule } from 'primeng/card';
 import { ToolbarModule } from 'primeng/toolbar';
@@ -83,7 +84,8 @@ const UX_MODULE = [
         UsersListComponent,
         UsersFormComponent,
         OrdersListComponent,
-        OrdersDetailComponent
+        OrdersDetailComponent,
+        OrderStatusPipe
     ],
     imports: [
         BrowserModule,

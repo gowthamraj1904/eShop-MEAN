@@ -2,34 +2,35 @@ const express = require('express');
 const router = express.Router();
 const { Category } = require('../models/category');
 
-// Get all categories
-router.get(`/`, async (req, res) => {
-    const categories = await Category.find();
-
-    if (!categories) {
-        res.status(500).json({ success: false });
-    }
-
-    res.status(200).send(categories);
+router.get(`/`, (req, res) => {
+    Category.find()
+        .then((categories) => {
+            res.status(200).send(categories);
+        })
+        .catch((error) => {
+            const response = {
+                message: 'Categories are not available',
+                error
+            };
+            res.status(400).json(response);
+        });
 });
 
-// Get one category by Id
-router.get('/:id', async (req, res) => {
-    const category = await Category.findById(req.params.id);
-
-    if (!category) {
-        const response = {
-            success: false,
-            message: 'Category is not available'
-        };
-        res.status(500).json(response);
-    }
-
-    res.status(200).send(category);
+router.get('/:id', (req, res) => {
+    Category.findById(req.params.id)
+        .then((category) => {
+            res.status(200).send(category);
+        })
+        .catch((error) => {
+            const response = {
+                message: 'Category is not available',
+                error
+            };
+            res.status(400).json(response);
+        });
 });
 
-// Add new Category
-router.post(`/`, async (req, res) => {
+router.post(`/`, (req, res) => {
     const category = {
         name: req.body.name,
         icon: req.body.icon,
@@ -37,60 +38,61 @@ router.post(`/`, async (req, res) => {
     };
     let newCategory = new Category(category);
 
-    newCategory = await newCategory.save();
-
-    if (!newCategory) {
-        res.status(404).send('The Category cannot be created');
-    }
-
-    res.status(200).send(newCategory);
+    newCategory
+        .save()
+        .then((category) => {
+            res.status(200).send(category);
+        })
+        .catch((error) => {
+            const response = {
+                message: 'The Category cannot be created',
+                error
+            };
+            res.status(400).json(response);
+        });
 });
 
-// Update a category
-router.put('/:id', async (req, res) => {
+router.put('/:id', (req, res) => {
     const category = {
         name: req.body.name,
         icon: req.body.icon,
         color: req.body.color
     };
 
-    const updateCategory = await Category.findByIdAndUpdate(
-        req.params.id,
-        category,
-        { new: true }
-    );
-
-    if (!updateCategory) {
-        res.status(404).send('The Category cannot be created');
-    }
-
-    res.status(200).send(updateCategory);
+    Category.findByIdAndUpdate(req.params.id, category, { new: true })
+        .then((category) => {
+            res.status(200).send(category);
+        })
+        .catch((error) => {
+            const response = {
+                message: 'The Category cannot be updated',
+                error
+            };
+            res.status(400).json(response);
+        });
 });
 
-// Delete a category by Id
 router.delete('/:id', (req, res) => {
     Category.findByIdAndRemove(req.params.id)
         .then((category) => {
             if (category) {
                 const response = {
-                    success: true,
                     message: 'The category is deleted'
                 };
-                return res.status(200).json(response);
+                res.status(200).json(response);
             } else {
                 const response = {
-                    success: false,
                     message: 'Category not found'
                 };
-                return res.status(404).json(response);
+                res.status(404).json(response);
             }
         })
-        .catch((err) => {
+        .catch((error) => {
             const response = {
-                success: false,
-                error: err
+                message: 'The category is not deleted',
+                error
             };
-            return res.status(400).json(response);
+            res.status(400).json(response);
         });
 });
 

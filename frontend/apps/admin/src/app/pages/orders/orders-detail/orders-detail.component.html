@@ -20,8 +20,8 @@
                     <p-dropdown
                         [options]="orderStatuses"
                         [(ngModel)]="selectedStatus"
-                        optionLabel="name"
-                        optionValue="id"
+                        optionLabel="label"
+                        optionValue="code"
                         placeholder="Select a Status"
                         styleClass="w-full"
                         (onChange)="onStatusChange()"
@@ -29,7 +29,7 @@
                 </div>
                 <div class="col-3">
                     <h5>Order Total Price</h5>
-                    <p>{{ order.totalPrice | currency : '₹' }}</p>
+                    <p>{{ order.totalPrice | currency }}</p>
                 </div>
             </div>
         </p-fieldset>
@@ -47,17 +47,18 @@
                 <div class="col-2">{{ item.product?.brand }}</div>
                 <div class="col-2">{{ item.product?.category?.name }}</div>
                 <div class="col-2">
-                    {{ item.product?.price | currency : '₹' }}
+                    {{ item.product?.price | currency }}
                 </div>
                 <div class="col-2">{{ item.quantity }}</div>
                 <div class="col-2">
-                    {{ item.product?.price! * item.quantity! | currency : '₹' }}
+                    {{ item.product?.price! * item.quantity! | currency }}
                 </div>
             </div>
+            <p-divider></p-divider>
             <div class="grid">
                 <div class="col-2 col-offset-8 font-bold">Total Price</div>
                 <div class="col-2 font-bold">
-                    {{ order.totalPrice | currency : '₹' }}
+                    {{ order.totalPrice | currency }}
                 </div>
             </div>
         </p-fieldset>

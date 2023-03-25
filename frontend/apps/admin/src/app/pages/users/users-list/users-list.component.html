@@ -5,11 +5,12 @@
         <div class="grid">
             <div class="col-12">
                 <p-toolbar>
-                    <div class="p-toolbar-group-left">
+                    <div class="p-toolbar-group-left"></div>
+                    <div class="p-toolbar-group-right">
                         <p-button
                             label="New"
                             icon="pi pi-plus"
-                            styleClass="p-button-success"
+                            styleClass="p-button-primary p-button-sm"
                             routerLink="form"
                         ></p-button>
                     </div>
@@ -75,26 +76,23 @@
                             <td>
                                 <p-tag
                                     icon="pi pi-user"
-                                    value="Admin"
-                                    severity="success"
-                                    *ngIf="user.isAdmin"
-                                ></p-tag>
-                                <p-tag
-                                    icon="pi pi-user"
-                                    value="User"
-                                    severity="primary"
-                                    *ngIf="!user.isAdmin"
+                                    [value]="user.isAdmin ? 'Admin' : 'Customer'"
+                                    [severity]="
+                                        user.isAdmin ? 'success' : 'primary'
+                                    "
                                 ></p-tag>
                             </td>
                             <td>
                                 <p-button
                                     icon="pi pi-trash"
-                                    styleClass="p-button-danger mr-2"
+                                    label="Delete"
+                                    styleClass="p-button-danger mr-2 p-button-sm"
                                     (click)="onDeleteUser(user.id)"
                                 ></p-button>
                                 <p-button
                                     icon="pi pi-pencil"
-                                    styleClass="p-button-success"
+                                    label="Edit"
+                                    styleClass="p-button-secondary p-button-sm"
                                     (click)="onEditUser(user.id)"
                                 ></p-button>
                             </td>

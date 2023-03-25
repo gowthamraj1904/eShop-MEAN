@@ -1,32 +1,36 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CategoriesService, Category } from '@lib/products';
 import { MessageService, ConfirmationService } from 'primeng/api';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
     selector: 'admin-categories-list',
     templateUrl: './categories-list.component.html',
     styleUrls: ['./categories-list.component.scss']
 })
-export class CategoriesListComponent implements OnInit {
+export class CategoriesListComponent implements OnInit, OnDestroy {
     categories: Category[] = [];
 
+    private endSubscription$: Subject<void> = new Subject();
+
     constructor(
-        private categoriesService: CategoriesService,
+        private router: Router,
         private messageService: MessageService,
         private confirmationService: ConfirmationService,
-        private router: Router
+        private categoriesService: CategoriesService
     ) {}
 
-    getCategories(): void {
+    private getCategories(): void {
         this.categoriesService
             .getCategories()
+            .pipe(takeUntil(this.endSubscription$))
             .subscribe((categories: Category[]) => {
                 this.categories = categories;
             });
     }
 
-    onDeleteConfirmation(categoryId: string): void {
+    private onDeleteConfirmation(categoryId: string): void {
         this.confirmationService.confirm({
             message: 'Do you want to delete this Category?',
             header: 'Delete Category',
@@ -36,36 +40,44 @@ export class CategoriesListComponent implements OnInit {
         });
     }
 
-    deleteCategory(categoryId: string): void {
-        this.categoriesService.deleteCategory(categoryId).subscribe({
-            next: (category: Category) => {
-                this.messageService.add({
-                    severity: 'success',
-                    summary: 'Success',
-                    detail: `Category ${category.name} is deleted`
-                });
+    private deleteCategory(categoryId: string): void {
+        this.categoriesService
+            .deleteCategory(categoryId)
+            .pipe(takeUntil(this.endSubscription$))
+            .subscribe({
+                next: () => {
+                    this.messageService.add({
+                        severity: 'success',
+                        summary: 'Success',
+                        detail: `Category is deleted`
+                    });
 
-                this.getCategories();
-            },
-            error: () => {
-                this.messageService.add({
-                    severity: 'error',
-                    summary: 'Error',
-                    detail: 'Category is not deleted'
-                });
-            }
-        });
+                    this.getCategories();
+                },
+                error: () => {
+                    this.messageService.add({
+                        severity: 'error',
+                        summary: 'Error',
+                        detail: 'Category is not deleted'
+                    });
+                }
+            });
     }
 
-    onDeleteCategory(categoryId: string) {
+    onDeleteCategory(categoryId: string): void {
         this.onDeleteConfirmation(categoryId);
     }
 
-    onEditCategory(categoryId: string) {
-        this.router.navigateByUrl(`categories/form/${categoryId}`);
+    onEditCategory(categoryId: string): void {
+        this.router.navigateByUrl(`shell/categories/form/${categoryId}`);
     }
 
     ngOnInit(): void {
         this.getCategories();
+    }
+
+    ngOnDestroy(): void {
+        this.endSubscription$.next();
+        this.endSubscription$.complete();
     }
 }
