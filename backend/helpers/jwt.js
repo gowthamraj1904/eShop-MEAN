@@ -12,21 +12,21 @@ function authJwt() {
     const categoriesUrlRegExp = /\/api\/v1\/categories(.*)/;
     const allowAll = /(.*)/;
     const excludeApis = [
-        {
-            url: productsImageUrlRegExp,
-            methods: ['GET', 'OPTIONS']
-        },
-        {
-            url: categoriesUrlRegExp,
-            methods: ['GET', 'OPTIONS']
-        },
-        {
-            url: productsUrlRegExp,
-            methods: ['GET', 'OPTIONS']
-        },
-        `${api}/users/login`,
-        `${api}/users/register`
-        // { url: allowAll} // Allow all the APIs
+        // {
+        //     url: productsImageUrlRegExp,
+        //     methods: ['GET', 'OPTIONS']
+        // },
+        // {
+        //     url: categoriesUrlRegExp,
+        //     methods: ['GET', 'OPTIONS']
+        // },
+        // {
+        //     url: productsUrlRegExp,
+        //     methods: ['GET', 'OPTIONS']
+        // },
+        // `${api}/users/login`,
+        // `${api}/users/register`
+        { url: allowAll} // Allow all the APIs
     ];
 
     return jwt({

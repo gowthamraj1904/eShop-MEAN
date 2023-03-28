@@ -1,0 +1,27 @@
+footer {
+    background-color: var(--yellow-100);
+    width: 100%;
+    padding: 25px;
+    margin-top: 25px;
+
+    .footer-wrapper {
+        align-items: center;
+
+        .social-icons {
+            text-align: right;
+
+            .nav {
+                justify-content: flex-end;
+
+                .nav-item {
+                    display: inline-block;
+
+                    a {
+                        color: var(--surface-700);
+                        margin-right: 10px;
+                    }
+                }
+            }
+        }
+    }
+}
