@@ -1,0 +1,12 @@
+.logo {
+    align-items: center;
+    display: flex;
+
+    a {
+        font-size: 34px;
+        font-weight: bold;
+        background: linear-gradient(to bottom right, #a22fce, #ff7000);
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+}
