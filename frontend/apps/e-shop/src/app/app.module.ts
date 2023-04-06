@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './app.routes';
@@ -19,7 +19,9 @@ import { OrdersModule, OrdersService } from '@lib/orders';
 
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
-import { UsersService } from '@lib/users';
+import { JwtInterceptor, LocalStorageService, UsersModule, UsersService } from '@lib/users';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
     declarations: [
@@ -39,14 +41,23 @@ import { UsersService } from '@lib/users';
         UiModule,
         OrdersModule,
         ToastModule,
-        ProductsModule
+        ProductsModule,
+        UsersModule,
+        StoreModule.forRoot({}),
+        EffectsModule.forRoot([])
     ],
     providers: [
         CategoriesService,
         ProductsService,
         MessageService,
         OrdersService,
-        UsersService
+        UsersService,
+        LocalStorageService,
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: JwtInterceptor,
+            multi: true
+        }
     ],
     bootstrap: [AppComponent]
 })

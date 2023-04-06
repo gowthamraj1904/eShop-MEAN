@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsersService } from '@lib/users';
@@ -8,13 +8,14 @@ import { CartService } from '../../services/cart.service';
 import { Cart } from '../../models/cart.model';
 import { OrdersService } from '../../services/orders.service';
 import { ORDER_STATUS } from '../../order.constants';
+import { Subject, take, takeUntil } from 'rxjs';
 
 @Component({
     selector: 'orders-checkout',
     templateUrl: './checkout.component.html',
     styleUrls: ['./checkout.component.scss']
 })
-export class CheckoutComponent implements OnInit {
+export class CheckoutComponent implements OnInit, OnDestroy {
     form: FormGroup;
 
     isSubmitted = false;
@@ -23,7 +24,9 @@ export class CheckoutComponent implements OnInit {
 
     orderItems: OrderItem[] = [];
 
-    userId = '64180a72f99459991e01c058';
+    userId: string;
+
+    private endSubscription$: Subject<void> = new Subject();
 
     constructor(
         private router: Router,
@@ -61,6 +64,26 @@ export class CheckoutComponent implements OnInit {
         }) as OrderItem[];
     }
 
+    private autofillUserData(): void {
+        this.usersService
+            .observeCurrentUser()
+            .pipe(takeUntil(this.endSubscription$))
+            .subscribe((user) => {
+                this.userId = user?.id as string;
+
+                this.form.patchValue({
+                    name: user?.name,
+                    email: user?.email,
+                    phone: user?.phone,
+                    street: user?.street,
+                    apartment: user?.apartment,
+                    city: user?.city,
+                    zip: user?.zip,
+                    country: user?.country
+                });
+            });
+    }
+
     backToCart(): void {
         this.router.navigate(['/cart']);
     }
@@ -94,5 +117,11 @@ export class CheckoutComponent implements OnInit {
         this.createForm();
         this.getCountries();
         this.getCartItems();
+        this.autofillUserData();
+    }
+
+    ngOnDestroy(): void {
+        this.endSubscription$.next();
+        this.endSubscription$.complete();
     }
 }
