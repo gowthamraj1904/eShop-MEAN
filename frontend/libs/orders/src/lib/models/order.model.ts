@@ -12,6 +12,6 @@ export class Order {
     phone?: string;
     totalPrice?: number;
     status?: string;
-    user?: User;
+    user?: User |  string;
     dateOrdered?: string;
 }

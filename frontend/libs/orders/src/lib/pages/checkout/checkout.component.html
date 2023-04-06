@@ -1,0 +1,192 @@
+<div class="checkout-page">
+    <div>
+        <p-button
+            label="Back to Cart"
+            icon="pi pi-arrow-left"
+            (onClick)="backToCart()"
+        ></p-button>
+    </div>
+
+    <div class="grid checkout-form">
+        <div class="col-8">
+            <form [formGroup]="form">
+                <div class="formgrid grid">
+                    <div class="field col-3">
+                        <label for="name">Name</label>
+                        <input
+                            id="name"
+                            type="text"
+                            class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+                            formControlName="name"
+                            aria-describedby="name-help"
+                        />
+                        <small
+                            id="name-help"
+                            class="p-error"
+                            *ngIf="form.controls['name'].invalid && isSubmitted"
+                            >Name is required</small
+                        >
+                    </div>
+                    <div class="field col-3">
+                        <label for="email">Email</label>
+                        <input
+                            id="email"
+                            type="email"
+                            class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+                            formControlName="email"
+                            aria-describedby="email-help"
+                        />
+                        <small
+                            id="email-help"
+                            class="p-error"
+                            *ngIf="
+                                form.controls['email'].invalid && isSubmitted
+                            "
+                        >
+                            <span
+                                *ngIf="
+                                        form.controls['email'].errors?.[
+                                            'required'
+                                        ]
+                                    "
+                                >Email is required</span
+                            >
+                            <span
+                                *ngIf="
+                                        form.controls['email'].errors?.[
+                                            'email'
+                                        ]
+                                    "
+                                >Email is invalid</span
+                            >
+                        </small>
+                    </div>
+                    <div class="field col-3">
+                        <label for="phone" class="block">Phone</label>
+                        <p-inputMask
+                            styleClass="w-full"
+                            id="phone"
+                            mask="999-999-9999"
+                            formControlName="phone"
+                            aria-describedby="phone-help"
+                            placeholder="999-999-9999"
+                        ></p-inputMask>
+                        <small
+                            id="phone-help"
+                            class="p-error"
+                            *ngIf="
+                                form.controls['phone'].invalid && isSubmitted
+                            "
+                            >Phone is required</small
+                        >
+                    </div>
+                </div>
+                <p-divider></p-divider>
+                <div class="formgrid grid">
+                    <div class="field col-3">
+                        <label for="phone">Apartment</label>
+                        <input
+                            id="apartment"
+                            type="text"
+                            class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+                            formControlName="apartment"
+                            aria-describedby="apartment-help"
+                        />
+                        <small
+                            id="apartment-help"
+                            class="p-error"
+                            *ngIf="
+                                form.controls['apartment'].invalid &&
+                                isSubmitted
+                            "
+                            >Apartment is required</small
+                        >
+                    </div>
+                    <div class="field col-3">
+                        <label for="phone">Street</label>
+                        <input
+                            id="street"
+                            type="text"
+                            class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+                            formControlName="street"
+                            aria-describedby="street-help"
+                        />
+                        <small
+                            id="street-help"
+                            class="p-error"
+                            *ngIf="
+                                form.controls['street'].invalid && isSubmitted
+                            "
+                            >Street is required</small
+                        >
+                    </div>
+                    <div class="field col-3">
+                        <label for="phone">City</label>
+                        <input
+                            id="city"
+                            type="text"
+                            class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+                            formControlName="city"
+                            aria-describedby="city-help"
+                        />
+                        <small
+                            id="city-help"
+                            class="p-error"
+                            *ngIf="form.controls['city'].invalid && isSubmitted"
+                            >City is required</small
+                        >
+                    </div>
+                    <div class="field col-3">
+                        <label for="phone">Zip Code</label>
+                        <input
+                            id="zip"
+                            type="text"
+                            class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+                            formControlName="zip"
+                            aria-describedby="zip-help"
+                        />
+                        <small
+                            id="zip-help"
+                            class="p-error"
+                            *ngIf="form.controls['zip'].invalid && isSubmitted"
+                            >Zip is required</small
+                        >
+                    </div>
+                    <div class="field col-3">
+                        <label for="phone">Country</label>
+                        <p-dropdown
+                            [filter]="true"
+                            filterBy="name"
+                            [showClear]="true"
+                            placeholder="Select a Country"
+                            formControlName="country"
+                            [options]="countries"
+                            optionLabel="name"
+                            optionValue="code"
+                            styleClass="w-full"
+                            aria-describedby="country-help"
+                        ></p-dropdown>
+                        <small
+                            id="country-help"
+                            class="p-error"
+                            *ngIf="
+                                form.controls['country'].invalid && isSubmitted
+                            "
+                            >Country is required</small
+                        >
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-4">
+            <orders-summary></orders-summary>
+            <div class="checkout-button">
+                <p-button
+                    styleClass="w-full"
+                    label="Place-Order"
+                    (onClick)="placeOrder()"
+                ></p-button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -7,6 +7,7 @@ import { Order } from '../models/order.model';
 @Injectable()
 export class OrdersService {
     apiUrl = `${environment.apiUrl}/orders`;
+    apiUrlProducts = `${environment.apiUrl}/products`;
 
     constructor(private http: HttpClient) {}
 
@@ -43,5 +44,9 @@ export class OrdersService {
         return this.http
             .get<number>(`${this.apiUrl}/get/total-sales`)
             .pipe(map((objectValue: any) => objectValue.totalSales));
+    }
+
+    getProductById(productId: string): Observable<any> {
+        return this.http.get<any>(`${this.apiUrlProducts}/${productId}`);
     }
 }

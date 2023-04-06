@@ -10,6 +10,7 @@ import { FeaturedProductsComponent } from './components/featured-products/featur
 import { ProductsListComponent } from './pages/products-list/products-list.component';
 import { ProductPageComponent } from './pages/product-page/product-page.component';
 import { UiModule } from '@lib/ui';
+import { CartService } from '@lib/orders';
 
 import { ButtonModule } from 'primeng/button';
 import { CheckboxModule } from 'primeng/checkbox';
@@ -40,6 +41,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
         FeaturedProductsComponent,
         ProductsListComponent,
         ProductPageComponent
-    ]
+    ],
+    providers: [CartService]
 })
 export class ProductsModule {}
