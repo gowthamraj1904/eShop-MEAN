@@ -15,6 +15,11 @@ import {
     ProductsModule,
     ProductsService
 } from '@lib/products';
+import { OrdersModule, OrdersService } from '@lib/orders';
+
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+import { UsersService } from '@lib/users';
 
 @NgModule({
     declarations: [
@@ -32,9 +37,17 @@ import {
             initialNavigation: 'enabledBlocking'
         }),
         UiModule,
+        OrdersModule,
+        ToastModule,
         ProductsModule
     ],
-    providers: [CategoriesService, ProductsService],
+    providers: [
+        CategoriesService,
+        ProductsService,
+        MessageService,
+        OrdersService,
+        UsersService
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {}

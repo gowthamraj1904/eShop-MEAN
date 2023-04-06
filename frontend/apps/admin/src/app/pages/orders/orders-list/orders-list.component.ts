@@ -1,10 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Order, OrdersService } from '@lib/orders';
+import { ORDER_STATUS, Order, OrderStatus, OrdersService } from '@lib/orders';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Subject, takeUntil } from 'rxjs';
-import { OrderStatus } from '../models/order-status.model';
-import { ORDER_STATUS } from '../order.constants';
 
 @Component({
     selector: 'admin-orders-list',

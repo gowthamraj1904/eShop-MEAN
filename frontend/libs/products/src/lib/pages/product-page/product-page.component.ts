@@ -3,6 +3,7 @@ import { Product } from '../../models/product.model';
 import { ProductsService } from '../../services/products.service';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
+import { CartItem, CartService } from '@lib/orders';
 
 @Component({
     selector: 'products-product-page',
@@ -12,17 +13,23 @@ import { Subject, takeUntil } from 'rxjs';
 export class ProductPageComponent implements OnInit, OnDestroy {
     product: Product;
 
-    quantity: number;
+    quantity = 1;
 
     private endSubscription$: Subject<void> = new Subject();
 
     constructor(
         private route: ActivatedRoute,
-        private productsService: ProductsService
+        private productsService: ProductsService,
+        private cartService: CartService
     ) {}
 
     addProductToCart(): void {
-        console.log(this.product);
+        const cartItem: CartItem = {
+            productId: this.product.id,
+            quantity: this.quantity
+        };
+
+        this.cartService.setCartItem(cartItem);
     }
 
     private getProducts(productId: string): void {
