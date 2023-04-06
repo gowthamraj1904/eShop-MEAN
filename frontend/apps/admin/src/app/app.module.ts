@@ -49,6 +49,8 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { PasswordModule } from 'primeng/password';
 import { DividerModule } from 'primeng/divider';
 import { FieldsetModule } from 'primeng/fieldset';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 const UX_MODULE = [
     ToolbarModule,
@@ -97,6 +99,8 @@ const UX_MODULE = [
         RouterModule.forRoot(appRoutes, {
             initialNavigation: 'enabledBlocking'
         }),
+        StoreModule.forRoot({}),
+        EffectsModule.forRoot([]),
         UsersModule,
         ...UX_MODULE
     ],
