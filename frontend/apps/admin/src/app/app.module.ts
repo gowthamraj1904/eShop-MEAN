@@ -51,6 +51,7 @@ import { DividerModule } from 'primeng/divider';
 import { FieldsetModule } from 'primeng/fieldset';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { NgxStripeModule } from 'ngx-stripe';
 
 const UX_MODULE = [
     ToolbarModule,
@@ -101,6 +102,9 @@ const UX_MODULE = [
         }),
         StoreModule.forRoot({}),
         EffectsModule.forRoot([]),
+        NgxStripeModule.forRoot(
+            'pk_test_51MttrZSC1tDs2Iq3urSQUuVKsgoGTrHASFAJ3KHBEFAGCwUaZv4JbsfkqnVpoMiPSZBPe86KlR8jkt1jXz4Con8r00dsnM7ctD'
+        ),
         UsersModule,
         ...UX_MODULE
     ],

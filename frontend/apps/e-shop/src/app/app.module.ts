@@ -22,6 +22,7 @@ import { MessageService } from 'primeng/api';
 import { JwtInterceptor, LocalStorageService, UsersModule, UsersService } from '@lib/users';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { NgxStripeModule } from 'ngx-stripe';
 
 @NgModule({
     declarations: [
@@ -44,7 +45,10 @@ import { EffectsModule } from '@ngrx/effects';
         ProductsModule,
         UsersModule,
         StoreModule.forRoot({}),
-        EffectsModule.forRoot([])
+        EffectsModule.forRoot([]),
+        NgxStripeModule.forRoot(
+            'pk_test_51MttrZSC1tDs2Iq3urSQUuVKsgoGTrHASFAJ3KHBEFAGCwUaZv4JbsfkqnVpoMiPSZBPe86KlR8jkt1jXz4Con8r00dsnM7ctD'
+        )
     ],
     providers: [
         CategoriesService,

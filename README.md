@@ -186,3 +186,12 @@ Create components in the libs
 ### Countries
 
 **_npm install i18n-iso-countries_**
+
+---
+
+## Payment gateway
+
+Stripe(https://dashboard.stripe.com/test/developers)
+
+**_npm install ngx-stripe @stripe/stripe-js_**
+**_npm install stripe_**
