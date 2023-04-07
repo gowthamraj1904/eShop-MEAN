@@ -195,3 +195,16 @@ Stripe(https://dashboard.stripe.com/test/developers)
 
 **_npm install ngx-stripe @stripe/stripe-js_**
 **_npm install stripe_**
+
+## Deploy Backend
+
+**_heroku_**
+
+## Deploy Frontend
+
+Using github pages
+
+**_nx build e-shop --prod --output-path docs --base-href /e-shop/_**
+
+Create build folder outside of the folder
+**_nx build e-shop --prod --output-path ../builds/e-shop/docs --base-href /e-shop/_**

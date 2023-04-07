@@ -13,6 +13,7 @@ require('dotenv/config');
 const port = process.env.PORT;
 const api = process.env.API_URL;
 const connectionString = process.env.CONNECTION_STRING;
+const dbName = process.env.DB_NAME;
 // Routers
 const categoriesRouter = require('./routers/categories');
 const productsRouter = require('./routers/products');
@@ -46,7 +47,7 @@ mongoose
     .connect(connectionString, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
-        dbName: 'eshop-database'
+        dbName: dbName
     })
     .then((res) => {
         console.log('database connection is ready');
