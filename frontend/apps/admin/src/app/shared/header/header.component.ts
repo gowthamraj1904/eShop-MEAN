@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@lib/users';
-import { LocalStorageService } from 'libs/users/src/lib/services/local-storage.service';
+import { LocalStorageService } from '@lib/users';
 
 @Component({
     selector: 'admin-header',
