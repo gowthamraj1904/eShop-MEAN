@@ -3,8 +3,11 @@
     "version": "1.0.0",
     "license": "MIT",
     "scripts": {
-        "start": "ng serve",
-        "lint": "nx run e-shop:lint && nx run admin:lint"
+        "start-e-shop": "ngx serve e-shop",
+        "start-e-admin": "ngx serve admin",
+        "lint": "nx run e-shop:lint && nx run admin:lint",
+        "build-prod-e-shop": "nx build e-shop --prod --output-path ../builds/e-shop/docs --base-href /e-shop/",
+        "build-prod-admin": "nx build admin --prod --output-path ../builds/admin/docs --base-href /admin/"
     },
     "private": true,
     "dependencies": {
