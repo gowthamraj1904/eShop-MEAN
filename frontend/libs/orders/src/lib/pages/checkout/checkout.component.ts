@@ -9,6 +9,7 @@ import { Cart } from '../../models/cart.model';
 import { OrdersService } from '../../services/orders.service';
 import { ORDER_STATUS } from '../../order.constants';
 import { Subject, take, takeUntil } from 'rxjs';
+import { StripeService } from 'ngx-stripe';
 
 @Component({
     selector: 'orders-checkout',
@@ -107,10 +108,15 @@ export class CheckoutComponent implements OnInit, OnDestroy {
             dateOrdered: `${Date.now()}`
         };
 
-        this.orderService.createOrders(order).subscribe(() => {
-            this.cartService.emptyCart();
-            this.router.navigate(['/thank-you']);
-        });
+        this.orderService.cacheOrderData(order);
+
+        this.orderService
+            .createCheckoutSession(this.orderItems)
+            .subscribe((error) => {
+                if (error) {
+                    console.log('error in redirect payment', error);
+                }
+            });
     }
 
     ngOnInit(): void {
