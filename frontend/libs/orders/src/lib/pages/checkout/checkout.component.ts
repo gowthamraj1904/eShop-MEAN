@@ -104,7 +104,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
             country: this.form.get('country')?.value,
             phone: this.form.get('phone')?.value,
             status: ORDER_STATUS[0].code,
-            user: this.userId,
+            user: { id: this.userId },
             dateOrdered: `${Date.now()}`
         };
 

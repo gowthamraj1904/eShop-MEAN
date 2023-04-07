@@ -6,8 +6,8 @@
         "start-e-shop": "ngx serve e-shop",
         "start-e-admin": "ngx serve admin",
         "lint": "nx run e-shop:lint && nx run admin:lint",
-        "build-prod-e-shop": "nx build e-shop --prod --output-path ../builds/e-shop/docs --base-href /e-shop/",
-        "build-prod-admin": "nx build admin --prod --output-path ../builds/admin/docs --base-href /admin/"
+        "build-prod-e-shop": "nx build e-shop --prod --output-path ../../builds/e-shop --base-href /e-shop/",
+        "build-prod-admin": "nx build admin --prod --output-path ../../builds/admin --base-href /admin/"
     },
     "private": true,
     "dependencies": {

@@ -8,6 +8,7 @@
         "build": {
             "executor": "@angular-devkit/build-angular:browser",
             "outputs": ["{options.outputPath}"],
+            "dependsOn": [],
             "options": {
                 "outputPath": "dist/apps/admin",
                 "index": "apps/admin/src/index.html",
@@ -34,7 +35,7 @@
                     "budgets": [
                         {
                             "type": "initial",
-                            "maximumWarning": "500kb",
+                            "maximumWarning": "5mb",
                             "maximumError": "1mb"
                         },
                         {
